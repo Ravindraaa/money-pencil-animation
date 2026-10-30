@@ -51,5 +51,109 @@
       "headline": "PAUSE FOR 24 HOURS",
       "subhead": "Avoid a purchase that strains your budget"
     }
+  ],
+  "visual_beats": [
+    [
+      {
+        "at": "Sounds harmless",
+        "shot_type": "bnpl_total",
+        "headline": "SMALL PAYMENT. SAME TOTAL.",
+        "subhead": "The price has not changed"
+      },
+      {
+        "at": "feel cheaper",
+        "shot_type": "bnpl_checkout",
+        "headline": "THE BUTTON FEELS EASIER",
+        "subhead": "A smaller first payment can hide the total"
+      }
+    ],
+    [
+      {
+        "at": "full price does not disappear",
+        "shot_type": "bnpl_future_payments",
+        "headline": "THE FULL PRICE STILL EXISTS",
+        "subhead": "Four payments are still one purchase"
+      },
+      {
+        "at": "future paychecks",
+        "shot_type": "bnpl_paycheck",
+        "headline": "YOUR NEXT PAYCHECK IS ALREADY COMMITTED",
+        "subhead": "Installments take money from future income"
+      }
+    ],
+    [
+      {
+        "at": "three different pay later apps",
+        "shot_type": "bnpl_stack",
+        "headline": "THREE APPS. THREE PLANS.",
+        "subhead": "Each one adds another due date"
+      },
+      {
+        "at": "payments can pile up",
+        "shot_type": "bnpl_total",
+        "headline": "THE PAYMENTS ADD UP",
+        "subhead": "Small plans can hit together"
+      }
+    ],
+    [
+      {
+        "at": "Missed payments",
+        "shot_type": "bnpl_missed",
+        "headline": "PAYMENT MISSED?",
+        "subhead": "A missed due date can have consequences"
+      },
+      {
+        "at": "late fees",
+        "shot_type": "bnpl_terms",
+        "headline": "CHECK THE PROVIDER TERMS",
+        "subhead": "Fees and restrictions vary by plan"
+      },
+      {
+        "at": "depending on the provider",
+        "shot_type": "bnpl_terms",
+        "headline": "THE RULES ARE NOT THE SAME",
+        "subhead": "Check your exact agreement"
+      }
+    ],
+    [
+      {
+        "at": "add every installment",
+        "shot_type": "bnpl_checklist",
+        "headline": "ADD EVERY INSTALLMENT",
+        "subhead": "Know the total due this month"
+      },
+      {
+        "at": "check the dates",
+        "shot_type": "bnpl_dates",
+        "headline": "MARK EVERY DUE DATE",
+        "subhead": "Know when each payment leaves"
+      },
+      {
+        "at": "full price today",
+        "shot_type": "bnpl_affordable",
+        "headline": "WOULD YOU PAY THE FULL PRICE?",
+        "subhead": "If not, pause before buying"
+      }
+    ],
+    [
+      {
+        "at": "close the tab",
+        "shot_type": "bnpl_close",
+        "headline": "CLOSE THE SHOPPING TAB",
+        "subhead": "Give yourself room to think"
+      },
+      {
+        "at": "wait twenty four hours",
+        "shot_type": "bnpl_wait",
+        "headline": "WAIT 24 HOURS",
+        "subhead": "Let the impulse pass"
+      },
+      {
+        "at": "money problem",
+        "shot_type": "bnpl_affordable",
+        "headline": "A DEAL SHOULD NOT CREATE DEBT",
+        "subhead": "Protect your budget first"
+      }
+    ]
   ]
 }
