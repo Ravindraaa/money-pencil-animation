@@ -4,13 +4,13 @@ on:
   workflow_dispatch:
     inputs:
       script_file:
-        description: 'Script JSON file under scripts/ (for example short_01.json)'
+        description: 'Script JSON file under scripts/'
         required: true
-        default: 'scripts/short_70k.json'
+        default: 'scripts/short_bnpl.json'
       output_name:
         description: 'Output MP4 base name (without extension)'
         required: true
-        default: 'money-stickman-70k'
+        default: 'money-stickman-bnpl'
   pull_request:
     branches: [main]
     paths:
@@ -56,20 +56,20 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Render video
         env:
-          SHORT_SPEC: ${{ github.event.inputs.script_file || 'scripts/short_70k.json' }}
-          OUTPUT_NAME: ${{ github.event.inputs.output_name || 'money-stickman-70k' }}
+          SHORT_SPEC: ${{ github.event.inputs.script_file || 'scripts/short_bnpl.json' }}
+          OUTPUT_NAME: ${{ github.event.inputs.output_name || 'money-stickman-bnpl' }}
         run: npm run render:short
       - name: Validate MP4
         env:
-          OUTPUT_NAME: ${{ github.event.inputs.output_name || 'money-stickman-70k' }}
+          OUTPUT_NAME: ${{ github.event.inputs.output_name || 'money-stickman-bnpl' }}
         run: python scripts/qa_video.py "output/${OUTPUT_NAME}.mp4"
       - name: Upload review files
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.event.inputs.output_name || 'money-stickman-70k' }}
+          name: ${{ github.event.inputs.output_name || 'money-stickman-bnpl' }}
           path: |
-            output/${{ github.event.inputs.output_name || 'money-stickman-70k' }}.mp4
-            output/${{ github.event.inputs.output_name || 'money-stickman-70k' }}-metadata.json
-            output/${{ github.event.inputs.output_name || 'money-stickman-70k' }}-storyboard.json
+            output/${{ github.event.inputs.output_name || 'money-stickman-bnpl' }}.mp4
+            output/${{ github.event.inputs.output_name || 'money-stickman-bnpl' }}-metadata.json
+            output/${{ github.event.inputs.output_name || 'money-stickman-bnpl' }}-storyboard.json
           if-no-files-found: error
           retention-days: 14
