@@ -1,0 +1,59 @@
+{
+  "title": "$70K and Still Broke",
+  "voice": "en-US-GuyNeural",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "segments": [
+    "This guy makes seventy thousand dollars a year, and by the 28th he has two hundred bucks left.",
+    "Here’s the three things nobody tells you.",
+    "One: every raise gets spent. Income goes up, so rent, car and takeout go up right behind it.",
+    "Two: invisible subscriptions. Four streaming apps, a gym you don’t use, a delivery membership. That’s easily two hundred dollars a month.",
+    "Three: cash sitting in a savings account paying almost nothing, while inflation quietly shrinks it.",
+    "The fix: split every raise, half for your life, half invested automatically. Follow for part two."
+  ],
+  "visuals": [
+    {
+      "shot_type": "bank_balance",
+      "headline": "$70K SALARY",
+      "subhead": "AVAILABLE ON THE 28TH",
+      "metric": "$212"
+    },
+    {
+      "shot_type": "paycheck",
+      "headline": "WHERE DOES IT GO?",
+      "subhead": "THE PAYCHECK SHRINKS",
+      "metric": "TAX + INSURANCE"
+    },
+    {
+      "shot_type": "lifestyle_stairs",
+      "headline": "RAISE = NEW BILLS",
+      "subhead": "INCOME UP. EXPENSES FOLLOW.",
+      "metric": "+$5K"
+    },
+    {
+      "shot_type": "subscriptions",
+      "headline": "FORGOTTEN SUBSCRIPTIONS",
+      "subhead": "SMALL CHARGES ADD UP",
+      "metric": "$200 / MONTH"
+    },
+    {
+      "shot_type": "inflation_cash",
+      "headline": "CASH LOSES VALUE",
+      "subhead": "INFLATION ERODES BUYING POWER",
+      "metric": "INFLATION"
+    },
+    {
+      "shot_type": "fifty_fifty",
+      "headline": "SPLIT EVERY RAISE",
+      "subhead": "50% FOR LIFE • 50% INVESTED",
+      "metric": "FOLLOW FOR PART 2"
+    }
+  ],
+  "hashtags": [
+    "#PersonalFinance",
+    "#MoneyTips",
+    "#Budgeting"
+  ],
+  "description": "Why you can earn $70K and still feel broke. Not financial advice."
+}
