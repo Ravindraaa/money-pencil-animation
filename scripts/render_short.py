@@ -17,7 +17,9 @@ from playwright.sync_api import sync_playwright
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
 WORK = ROOT / "work"
-SPEC = json.loads((ROOT / "scripts/short_01.json").read_text(encoding="utf-8"))
+SPEC_PATH = Path(__import__("os").environ.get("SHORT_SPEC", str(ROOT / "scripts/short_01.json"))).resolve()
+SPEC = json.loads(SPEC_PATH.read_text(encoding="utf-8"))
+OUTPUT_NAME = __import__("os").environ.get("OUTPUT_NAME", SPEC_PATH.stem.replace("short_", "money-stickman-"))
 VOICE = SPEC.get("voice", "en-US-GuyNeural")
 FPS = int(SPEC.get("fps", 30))
 WIDTH = int(SPEC.get("width", 1080))
@@ -109,7 +111,7 @@ def main() -> int:
     server.server_close()
 
     silent_video = WORK / "silent.mp4"
-    final_video = OUT / "money-stickman-short-01.mp4"
+    final_video = OUT / f"{OUTPUT_NAME}.mp4"
     run(["ffmpeg", "-y", "-framerate", str(FPS), "-i", str(frames_dir / "frame_%06d.png"),
          "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
          "-an", str(silent_video)])
@@ -132,7 +134,7 @@ def main() -> int:
         "fps": FPS,
         "resolution": f"{WIDTH}x{HEIGHT}"
     }
-    (OUT / "short-01-metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+    (OUT / f"{OUTPUT_NAME}-metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
     print(f"Rendered: {final_video}")
     print(f"Duration: {total_duration:.2f}s")
     return 0
