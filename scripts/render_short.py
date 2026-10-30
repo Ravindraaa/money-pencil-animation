@@ -139,7 +139,8 @@ def main() -> int:
         "fps": FPS,
         "resolution": f"{WIDTH}x{HEIGHT}",
         "storyboard_file": storyboard_path.name,
-        "scene_planner": storyboard["planner"],\n        "scene_count": storyboard["scene_count"]
+        "scene_planner": storyboard["planner"],
+        "scene_count": storyboard["scene_count"]
     }
     (OUT / f"{OUTPUT_NAME}-metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
     print(f"Rendered: {final_video}")
