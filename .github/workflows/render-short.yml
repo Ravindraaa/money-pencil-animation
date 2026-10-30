@@ -11,6 +11,13 @@ on:
         description: 'Output MP4 base name (without extension)'
         required: true
         default: 'money-stickman-short-01'
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'scripts/**'
+      - 'requirements.txt'
+      - '.github/workflows/render-short.yml'
   push:
     branches: [main]
     paths:
