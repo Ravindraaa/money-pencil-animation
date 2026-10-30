@@ -107,6 +107,12 @@
   const sceneIndex=Math.min(6,Math.floor(index*7/timeline.segments.length));
   scenes.forEach((el,i)=>{
     el.style.display=i===sceneIndex?'inline':'none';
+    if(i===sceneIndex){
+      const zoom=1.015+0.045*local;
+      const drift=Math.sin(local*Math.PI*2)*10;
+      el.style.transformOrigin='540px 900px';
+      el.style.transform='translate('+drift+'px, '+(-drift*.35)+'px) scale('+zoom+')';
+    }
     el.querySelectorAll('.draw').forEach((path)=>{
       if(!path.dataset.length){try{path.dataset.length=path.getTotalLength()}catch(e){path.dataset.length=1000}}
       const length=Number(path.dataset.length);
@@ -115,9 +121,13 @@
       path.style.opacity=local<.04?0:1;
     });
   });
-  const [line1,line2]=wrap(seg.text);
-  caption.textContent=line1; caption2.textContent=line2;
+  const [line1,line2]=captionPhrase(seg.text,local);
+  caption.textContent=line1||''; caption2.textContent=line2||'';
+  caption.setAttribute('font-size','52'); caption2.setAttribute('font-size','52');
+  caption.setAttribute('y','1645'); caption2.setAttribute('y','1710');
   captionBg.setAttribute('opacity',local<.02?'0':'0.94');
+  const pop=0.96+0.04*Math.min(1,local*12);
+  document.getElementById('caption').setAttribute('transform','translate(540 1660) scale('+pop+') translate(-540 -1660)');
  };
  window.renderAt(0);
 })();
