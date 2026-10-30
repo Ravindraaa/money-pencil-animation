@@ -1,0 +1,54 @@
+name: Render Credit Card Trap Short
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'scripts/short_02.json'
+      - 'src/index.html'
+      - '.github/workflows/render-credit-card.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  render:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg
+      - name: Install dependencies
+        run: |
+          npm install
+          python -m pip install -r requirements.txt
+          python -m playwright install --with-deps chromium
+      - name: Test storyboard planner
+        run: python -m unittest discover -s tests -v
+      - name: Render credit card video
+        env:
+          SHORT_SPEC: scripts/short_02.json
+          OUTPUT_NAME: money-stickman-credit-card
+        run: npm run render:short
+      - name: Validate MP4
+        run: python scripts/qa_video.py output/money-stickman-credit-card.mp4
+      - name: Upload review files
+        uses: actions/upload-artifact@v4
+        with:
+          name: money-stickman-credit-card
+          path: |
+            output/money-stickman-credit-card.mp4
+            output/money-stickman-credit-card-metadata.json
+            output/money-stickman-credit-card-storyboard.json
+          if-no-files-found: error
+          retention-days: 14
