@@ -1,0 +1,53 @@
+{
+  "title": "The Credit Card Trap",
+  "voice": "en-US-GuyNeural",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "segments": [
+    "A twenty-four percent credit card is like an investment that guarantees you lose twenty-four percent.",
+    "Say you owe six thousand dollars and only pay the minimum. A big chunk of every payment goes to interest, so the balance barely moves. It can take over a decade to clear.",
+    "Two ways to fight it. Avalanche: pay the highest interest rate first. Snowball: pay the smallest balance first. Both work. Pick one today.",
+    "Call your card company and ask for a lower rate. And build a small cushion so surprise bills never land on the card.",
+    "Send this to a friend who needs it. Follow for more."
+  ],
+  "visuals": [
+    {
+      "shot_type": "credit_card_hook",
+      "headline": "THE 24% TRAP",
+      "subhead": "A GUARANTEED LOSS",
+      "metric": "24% APR"
+    },
+    {
+      "shot_type": "credit_balance",
+      "headline": "$6,000 BALANCE",
+      "subhead": "MINIMUM PAYMENTS KEEP YOU STUCK",
+      "metric": "INTEREST"
+    },
+    {
+      "shot_type": "debt_methods",
+      "headline": "TWO WAYS TO FIGHT DEBT",
+      "subhead": "AVALANCHE OR SNOWBALL",
+      "metric": "PICK ONE TODAY"
+    },
+    {
+      "shot_type": "rate_call_cushion",
+      "headline": "CALL YOUR BANK",
+      "subhead": "ASK FOR A LOWER RATE",
+      "metric": "$1,000 CUSHION"
+    },
+    {
+      "shot_type": "debt_cta",
+      "headline": "SEND THIS TO A FRIEND",
+      "subhead": "WITH A CARD BALANCE",
+      "metric": "FOLLOW FOR MORE"
+    }
+  ],
+  "hashtags": [
+    "#CreditCardDebt",
+    "#PersonalFinance",
+    "#MoneyTips",
+    "#DebtFree"
+  ],
+  "description": "How credit card interest keeps balances high—and two practical ways to pay debt down. Not financial advice."
+}
