@@ -12,7 +12,7 @@ from functools import partial
 from pathlib import Path
 
 import edge_tts
-from playwright.sync_api import sync_playwright
+from playwright.sync_api import sync_playwright\nfrom scene_planner import build_storyboard
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
@@ -132,7 +132,7 @@ def main() -> int:
         "voice": VOICE,
         "duration_seconds": round(total_duration, 2),
         "fps": FPS,
-        "resolution": f"{WIDTH}x{HEIGHT}"
+        "resolution": f"{WIDTH}x{HEIGHT}",\n        "storyboard_file": storyboard_path.name,\n        "scene_planner": storyboard["planner"],\n        "scene_count": storyboard["scene_count"]
     }
     (OUT / f"{OUTPUT_NAME}-metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
     print(f"Rendered: {final_video}")
