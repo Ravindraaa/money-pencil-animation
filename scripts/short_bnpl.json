@@ -19,5 +19,37 @@
     "#Budgeting",
     "#TheMoneyStickman"
   ],
-  "description": "Buy now, pay later can make purchases feel smaller—but multiple installments can add up. Check the full cost, payment dates, and provider terms before you buy. Educational content, not financial advice."
+  "description": "Buy now, pay later can make purchases feel smaller—but multiple installments can add up. Check the full cost, payment dates, and provider terms before you buy. Educational content, not financial advice.",
+  "visuals": [
+    {
+      "shot_type": "bnpl_checkout",
+      "headline": "$400 CHECKOUT → 4 PAYMENTS",
+      "subhead": "The button makes it feel smaller"
+    },
+    {
+      "shot_type": "bnpl_future_payments",
+      "headline": "THE FULL PRICE STILL EXISTS",
+      "subhead": "You commit future paychecks"
+    },
+    {
+      "shot_type": "bnpl_stack",
+      "headline": "THREE APPS. ONE PAYCHECK.",
+      "subhead": "Small installments can pile up"
+    },
+    {
+      "shot_type": "bnpl_missed",
+      "headline": "MISSED PAYMENT?",
+      "subhead": "Fees and restrictions depend on the plan"
+    },
+    {
+      "shot_type": "bnpl_checklist",
+      "headline": "CHECK BEFORE YOU TAP",
+      "subhead": "Total due • dates • balance"
+    },
+    {
+      "shot_type": "bnpl_wait",
+      "headline": "PAUSE FOR 24 HOURS",
+      "subhead": "Avoid a purchase that strains your budget"
+    }
+  ]
 }
