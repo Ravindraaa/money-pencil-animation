@@ -80,8 +80,10 @@ def main() -> int:
     total_duration = cursor
 
     storyboard = build_storyboard(segments)
-    for item, scene in zip(timeline, storyboard["scenes"]):
-        item["scene"] = scene
+    visual_beats = SPEC.get("visuals", [])
+    for index, (item, scene) in enumerate(zip(timeline, storyboard["scenes"])):
+        item["scene"] = {**scene, **(visual_beats[index] if index < len(visual_beats) else {})}
+        storyboard["scenes"][index] = item["scene"]
     storyboard_path = OUT / f"{OUTPUT_NAME}-storyboard.json"
     storyboard_path.write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
     timeline_path = WORK / "timeline.json"
@@ -133,7 +135,7 @@ def main() -> int:
             "assumptions, fees, taxes, and local rules before making financial decisions.\n\n"
             "Follow The Money Stickman for practical money lessons."
         ),
-        "hashtags": ["#PersonalFinance", "#MoneyHabits", "#InvestingBasics", "#MoneyStickman"],
+        "hashtags": SPEC.get("hashtags", ["#PersonalFinance", "#MoneyHabits", "#InvestingBasics", "#MoneyStickman"]),
         "voice": VOICE,
         "duration_seconds": round(total_duration, 2),
         "fps": FPS,
