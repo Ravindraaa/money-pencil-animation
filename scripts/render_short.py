@@ -40,9 +40,21 @@ def probe_duration(path: Path) -> float:
     return float(result.stdout.strip())
 
 
-async def synthesize(segment: str, destination: Path) -> None:
+async def synthesize(segment: str, destination: Path) -> list[dict]:
+    """Save speech audio and collect real word-boundary timestamps from Edge TTS."""
     communicate = edge_tts.Communicate(segment, VOICE, rate="-8%", volume="+0%")
-    await communicate.save(str(destination))
+    boundaries: list[dict] = []
+    with destination.open("wb") as audio_file:
+        async for chunk in communicate.stream():
+            if chunk["type"] == "audio":
+                audio_file.write(chunk["data"])
+            elif chunk["type"] == "WordBoundary":
+                boundaries.append({
+                    "start": chunk["offset"] / 10_000_000,
+                    "duration": chunk["duration"] / 10_000_000,
+                    "text": chunk["text"],
+                })
+    return boundaries
 
 
 def main() -> int:
@@ -61,9 +73,10 @@ def main() -> int:
 
     segments = SPEC["segments"]
     audio_paths: list[Path] = []
+    word_boundaries: list[list[dict]] = []
     for index, text in enumerate(segments):
         destination = audio_dir / f"segment_{index:02d}.mp3"
-        asyncio.run(synthesize(text, destination))
+        word_boundaries.append(asyncio.run(synthesize(text, destination)))
         audio_paths.append(destination)
 
     durations = [probe_duration(path) for path in audio_paths]
@@ -75,7 +88,20 @@ def main() -> int:
     timeline = []
     cursor = 0.0
     for index, duration in enumerate(durations):
-        timeline.append({"start": cursor, "end": cursor + duration, "text": segments[index]})
+        words = word_boundaries[index]
+        timeline.append({
+            "start": cursor,
+            "end": cursor + duration,
+            "text": segments[index],
+            "words": [
+                {
+                    "start": cursor + word["start"],
+                    "end": cursor + word["start"] + word["duration"],
+                    "text": word["text"],
+                }
+                for word in words
+            ],
+        })
         cursor += duration + (pause_seconds if index < len(durations) - 1 else 0.0)
     total_duration = cursor
 
@@ -129,11 +155,9 @@ def main() -> int:
 
     metadata = {
         "title": SPEC["title"],
-        "description": (
-            "Educational content from The Money Stickman. Examples and projections are "
-            "illustrative only, not promises or personal financial advice. Verify figures, "
-            "assumptions, fees, taxes, and local rules before making financial decisions.\n\n"
-            "Follow The Money Stickman for practical money lessons."
+        "description": SPEC.get(
+            "description",
+            "Educational content from The Money Stickman. Not personal financial advice."
         ),
         "hashtags": SPEC.get("hashtags", ["#PersonalFinance", "#MoneyHabits", "#InvestingBasics", "#MoneyStickman"]),
         "voice": VOICE,
