@@ -116,10 +116,10 @@
 <script>
 (async()=>{
  const params=new URLSearchParams(location.search);let tl={segments:[]};try{const u=params.get('timeline');if(u)tl=await(await fetch(u)).json()}catch(e){}
- const sceneIds=['s0','s1','s2','s3','s4','s5','s6','s7'],scenes=sceneIds.map(x=>document.getElementById(x)),cap1=document.getElementById('cap1'),cap2=document.getElementById('cap2');
+ const sceneIds=['s0','s1','s3','s4','s5','s6','s7'],scenes=sceneIds.map(x=>document.getElementById(x)),cap1=document.getElementById('cap1'),cap2=document.getElementById('cap2');
  function captionChunks(text){const w=(text||'').replace(/[^\w$%.,'-]+/g,' ').trim().split(/\s+/);const out=[];for(let i=0;i<w.length;i+=5)out.push(w.slice(i,i+5).join(' '));return out;}
  function fit(el,max=840){let size=48;el.setAttribute('font-size',size);while(el.getComputedTextLength()>max&&size>32){size-=2;el.setAttribute('font-size',size)}}
- function revealDraw(scene,q){scene.querySelectorAll('.draw').forEach((p)=>{p.style.strokeDasharray='1';p.style.strokeDashoffset=String(1-Math.min(1,Math.max(0,(q-.08)/.62)))});}
+ function revealDraw(scene,q){scene.querySelectorAll('path').forEach((p)=>{p.setAttribute('pathLength','1');p.style.strokeDasharray='1';p.style.strokeDashoffset=String(1-Math.min(1,Math.max(0,(q-.08)/.62)));});}
  window.renderAt=(t)=>{
   if(!tl.segments||!tl.segments.length)return;
   let i=tl.segments.findIndex(x=>t>=x.start&&t<x.end);if(i<0)i=tl.segments.length-1;
@@ -129,7 +129,7 @@
   if(i===0){const cup=document.getElementById('heroCup');cup.setAttribute('transform','translate(535 '+(850-18*Math.sin(q*Math.PI*4))+') scale(1.35)');}
   if(i===1){const cards=document.getElementById('weekdayCards');cards.setAttribute('transform','translate(0 '+(12*Math.sin(q*Math.PI*4))+')');}
   if(i===2){document.getElementById('calendar').setAttribute('transform','translate(540 700) scale('+(0.96+0.04*q)+')');}
-  if(i===3){const coin=document.getElementById('movingCoin');coin.setAttribute('transform','translate('+(430+300*q)+' '+(740-30*Math.sin(q*Math.PI))+')');}
+  if(i===2){const coin=document.getElementById('movingCoin');coin.setAttribute('transform','translate('+(430+300*q)+' '+(740-30*Math.sin(q*Math.PI))+')');}
   const chunks=captionChunks(s.text),n=Math.min(Math.max(0,chunks.length-1),Math.floor(q*chunks.length));let a=chunks[n]||'',b='';
   // One short caption phrase at a time; do not show future words early.
   cap1.textContent=a;cap2.textContent=b;fit(cap1);fit(cap2);document.getElementById('captions').setAttribute('opacity',q<.025?0:1);
