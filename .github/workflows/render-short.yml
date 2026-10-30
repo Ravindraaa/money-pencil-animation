@@ -2,6 +2,13 @@ name: Render Money Stickman Short
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'src/**'
+      - 'scripts/**'
+      - 'requirements.txt'
+      - '.github/workflows/render-short.yml'
 
 permissions:
   contents: read
