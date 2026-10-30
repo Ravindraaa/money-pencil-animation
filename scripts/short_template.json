@@ -1,0 +1,16 @@
+{
+  "title": "Replace with your finance Short title",
+  "voice": "en-US-GuyNeural",
+  "width": 1080,
+  "height": 1920,
+  "fps": 30,
+  "segments": [
+    "HOOK: introduce the money habit or surprising question.",
+    "CONTEXT: explain the everyday spending example.",
+    "ALTERNATIVE: show what the money could do instead.",
+    "MATH: explain the hypothetical calculation and assumptions.",
+    "RISK: explain uncertainty, fees, taxes, and inflation where relevant.",
+    "TAKEAWAY: give a practical, non-judgmental lesson.",
+    "CTA: invite viewers to follow The Money Stickman."
+  ]
+}
