@@ -51,6 +51,8 @@ jobs:
           npm install
           python -m pip install -r requirements.txt
           python -m playwright install --with-deps chromium
+      - name: Test semantic storyboard planner
+        run: python -m unittest discover -s tests -v
       - name: Render video
         env:
           SHORT_SPEC: ${{ github.event.inputs.script_file || 'scripts/short_01.json' }}
@@ -63,9 +65,10 @@ jobs:
       - name: Upload review files
         uses: actions/upload-artifact@v4
         with:
-          name: money-stickman-short-01
+          name: ${{ github.event.inputs.output_name || 'money-stickman-short-01' }}
           path: |
             output/${{ github.event.inputs.output_name || 'money-stickman-short-01' }}.mp4
             output/${{ github.event.inputs.output_name || 'money-stickman-short-01' }}-metadata.json
+            output/${{ github.event.inputs.output_name || 'money-stickman-short-01' }}-storyboard.json
           if-no-files-found: error
           retention-days: 14

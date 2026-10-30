@@ -41,7 +41,7 @@ The renderer now accepts a script JSON file and output name through environment 
 - `SHORT_SPEC`: path to a JSON script under `scripts/`
 - `OUTPUT_NAME`: output basename (no extension)
 
-Create a new script by copying `scripts/short_template.json`, then edit the title and seven narration segments. Keep the seven beats in order: hook, context, alternative, math, risk, takeaway, CTA. The current visual template maps these seven beats to its seven illustrated scene types, so narration must follow that order until the scene library is expanded.
+Create a new script by copying `scripts/short_template.json`, then edit the title and seven narration segments. Use any number of non-empty narration segments. Each beat is classified by the local semantic planner and rendered with a topic-matched pencil illustration (budget, investing, growth, debt, housing, risk, goals, or general explainer). The planner is deterministic and does not require a paid API key.
 
 ### Render any script from GitHub Actions
 
@@ -54,4 +54,4 @@ SHORT_SPEC=scripts/your_topic.json OUTPUT_NAME=money-stickman-your-topic npm run
 python scripts/qa_video.py output/money-stickman-your-topic.mp4
 ```
 
-This is a reusable script-driven pipeline, not yet an AI storyboard generator: the seven scene illustrations are a reusable template. A later scene-library upgrade can add more visual types without changing the TTS/timeline/render core.
+This is a reusable script-in/video-out pipeline. A local semantic planner creates a storyboard for every narration beat, the SVG scene renderer chooses a matching illustration, and the renderer exports an MP4, metadata JSON, and storyboard JSON. The planner is deterministic rule-based classification, not an LLM-generated custom drawing system; the visual library can be expanded independently of the TTS and timeline core.

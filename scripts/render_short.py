@@ -13,6 +13,7 @@ from pathlib import Path
 
 import edge_tts
 from playwright.sync_api import sync_playwright
+from scene_planner import build_storyboard
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
@@ -78,6 +79,13 @@ def main() -> int:
         cursor += duration + (pause_seconds if index < len(durations) - 1 else 0.0)
     total_duration = cursor
 
+    storyboard = build_storyboard(segments)
+    visual_beats = SPEC.get("visuals", [])
+    for index, (item, scene) in enumerate(zip(timeline, storyboard["scenes"])):
+        item["scene"] = {**scene, **(visual_beats[index] if index < len(visual_beats) else {})}
+        storyboard["scenes"][index] = item["scene"]
+    storyboard_path = OUT / f"{OUTPUT_NAME}-storyboard.json"
+    storyboard_path.write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
     timeline_path = WORK / "timeline.json"
     timeline_path.write_text(json.dumps({"duration": total_duration, "segments": timeline}), encoding="utf-8")
     concat_file = WORK / "audio_concat.txt"
@@ -122,17 +130,19 @@ def main() -> int:
     metadata = {
         "title": SPEC["title"],
         "description": (
-            "Could one small daily expense become a bigger opportunity? This video uses an "
-            "illustrative investing example, not a promise or a prediction. The 7% return is "
-            "hypothetical; actual returns vary, and fees, taxes, and inflation are not included. "
-            "This is educational content, not personal financial advice.\n\n"
+            "Educational content from The Money Stickman. Examples and projections are "
+            "illustrative only, not promises or personal financial advice. Verify figures, "
+            "assumptions, fees, taxes, and local rules before making financial decisions.\n\n"
             "Follow The Money Stickman for practical money lessons."
         ),
-        "hashtags": ["#PersonalFinance", "#MoneyHabits", "#InvestingBasics", "#MoneyStickman"],
+        "hashtags": SPEC.get("hashtags", ["#PersonalFinance", "#MoneyHabits", "#InvestingBasics", "#MoneyStickman"]),
         "voice": VOICE,
         "duration_seconds": round(total_duration, 2),
         "fps": FPS,
-        "resolution": f"{WIDTH}x{HEIGHT}"
+        "resolution": f"{WIDTH}x{HEIGHT}",
+        "storyboard_file": storyboard_path.name,
+        "scene_planner": storyboard["planner"],
+        "scene_count": storyboard["scene_count"]
     }
     (OUT / f"{OUTPUT_NAME}-metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
     print(f"Rendered: {final_video}")
