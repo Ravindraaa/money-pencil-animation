@@ -13,11 +13,19 @@ RULES = [
     ("goal", r"goal|future|plan|afford|freedom|target|dream|priority"),
 ]
 ENTITY_RULES = [
-    ("coffee", r"coffee|café|cafe"), ("house", r"house|home|rent|mortgage|property"),
-    ("card", r"credit card|card|debt|loan|emi"), ("chart", r"growth|return|compound|market|invest|stock"),
-    ("calendar", r"week|weekday|month|year|daily|every day"), ("warning", r"risk|not guaranteed|uncertain|fee|tax|inflation|loss"),
-    ("wallet", r"budget|spend|expense|save|saving|wallet"), ("cash", r"\$\s?[\d,]+|dollar|cash|money"),
-    ("target", r"goal|target|future|plan"),
+    ("coffee", r"coffee|café|cafe"),
+    ("house", r"house|home|rent|mortgage|property|housing"),
+    ("card", r"credit card|card|debt|loan|emi|apr|borrow"),
+    ("chart", r"growth|return|compound|market|invest|stock|share|portfolio|fund"),
+    ("paycheck", r"paycheck|salary|wage|income|take.home"),
+    ("subscription", r"subscription|streaming|membership|monthly charge"),
+    ("car", r"car|vehicle|auto|gas|fuel"),
+    ("bill", r"bill|utility|insurance|payment|expense|fee"),
+    ("calendar", r"week|weekday|month|year|daily|every day|deadline"),
+    ("warning", r"risk|not guaranteed|uncertain|tax|inflation|loss|penalty|downside"),
+    ("wallet", r"budget|spend|save|saving|wallet|purchase|buy|cost"),
+    ("cash", r"\\$\\s?[\\d,]+|dollar|cash|money|balance"),
+    ("target", r"goal|target|future|plan|retirement|freedom"),
 ]
 HEADLINES = {
     "risk":"CHECK THE DOWNSIDE", "debt":"UNDERSTAND THE COST", "housing":"PLAN THE BIG COSTS",
