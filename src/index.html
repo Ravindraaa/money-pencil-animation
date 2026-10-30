@@ -1,138 +1,78 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Money Stickman — Coffee Habit</title>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Money Stickman</title>
 <style>
 *{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f7f4ec}
 #stage{width:100vw;height:100vh;display:block;background:#f7f4ec}
 .ink{fill:none;stroke:#25231f;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
-.pencil{fill:none;stroke:#25231f;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}
 .thin{stroke-width:6}.txt{font-family:Arial,sans-serif;fill:#25231f;font-weight:800}
-.label{font-size:38px;letter-spacing:2px}.headline{font-size:72px}.number{font-size:112px}.small{font-size:34px}
-.scene{display:none}.card{fill:#fffdf7;stroke:#25231f;stroke-width:7}.gold{fill:#e8b653;stroke:#25231f;stroke-width:7}.green{fill:#b8c69a;stroke:#25231f;stroke-width:7}.dark{fill:#25231f}
+.head{font-size:64px;letter-spacing:1px}.label{font-size:36px}.number{font-size:100px}
 #captions rect{fill:#25231f;opacity:.97}#cap1,#cap2{fill:#fffdf7;font-family:Arial,sans-serif;font-weight:800}
+.draw{stroke-dasharray:1;stroke-dashoffset:0}
 </style></head><body>
 <svg id="stage" viewBox="0 0 1080 1920" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
 <defs>
  <pattern id="paper" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="3" cy="4" r="1" fill="#bdb5a6" opacity=".24"/></pattern>
- <g id="person" class="ink"><circle cx="0" cy="0" r="54" fill="#f7f4ec"/><path d="M-24 -8q12 -13 24 0M10 -8q12 -13 24 0M-16 22q16 14 32 0M0 54v205M0 105l-90 100M0 105l90 100M0 259l-76 140M0 259l76 140"/></g>
- <g id="coffee" class="ink"><path d="M-48 -38h96l-10 105h-76z" fill="#fffdf7"/><path d="M48 -24h22q24 0 14 30L65 35H43"/><path class="thin" d="M-22 -54q-22 -22 0 -45M12 -54q-22 -22 0 -45"/></g>
- <g id="coin"><circle r="43" class="gold"/><text y="15" text-anchor="middle" class="txt small">$</text></g>
+ <g id="person" class="ink"><circle cx="0" cy="0" r="52" fill="#f7f4ec"/><path d="M-22 -8q11 -12 22 0M10 -8q11 -12 22 0M-15 20q15 13 30 0M0 52v205M0 105l-85 95M0 105l85 95M0 257l-72 140M0 257l72 140"/></g>
+ <g id="coin"><circle r="43" fill="#e8b653" stroke="#25231f" stroke-width="7"/><text y="15" text-anchor="middle" class="txt label">$</text></g>
+ <g id="mug" class="ink"><path d="M-48 -35h96l-10 100h-76z" fill="#fffdf7"/><path d="M48 -20h22q24 0 14 30L65 35H43"/><path d="M-20 -52q-18 -20 0 -40M15 -52q-18 -20 0 -40"/></g>
 </defs>
 <rect width="1080" height="1920" fill="#f7f4ec"/><rect width="1080" height="1920" fill="url(#paper)"/>
-<text x="540" y="112" text-anchor="middle" class="txt label">THE MONEY STICKMAN</text><path d="M140 150H940" stroke="#b7ae9e" stroke-width="3"/>
-<!-- Scene 0: buy a coffee for $7 -->
-<g id="s0" class="scene">
- <text x="540" y="280" text-anchor="middle" class="txt headline">THE DAILY COFFEE</text>
- <path class="pencil draw" pathLength="1" d="M120 1030H960M170 1030V450H910V1030"/>
- <g transform="translate(355 540)"><use href="#person"/></g>
- <g transform="translate(780 565) scale(.78)"><use href="#person"/></g>
- <path class="ink" d="M355 645Q420 690 500 790"/>
- <g id="heroCup" transform="translate(535 850) scale(1.35)"><use href="#coffee"/></g>
- <rect x="650" y="390" width="250" height="170" rx="20" class="green"/>
- <text x="775" y="445" text-anchor="middle" class="txt small">COFFEE</text><text x="775" y="535" text-anchor="middle" class="txt number" font-size="86">$7</text>
- <text x="540" y="1190" text-anchor="middle" class="txt headline">ONE CUP. SEVEN DOLLARS.</text>
- <text x="540" y="1270" text-anchor="middle" class="txt small">A SMALL DAILY HABIT</text>
-</g>
-<!-- Scene 1: five weekday coffees -->
-<g id="s1" class="scene">
- <text x="540" y="280" text-anchor="middle" class="txt headline">FIVE WORKDAYS</text>
- <g id="weekdayCards">
-  <g transform="translate(170 440)"><rect x="-75" y="0" width="150" height="420" rx="22" class="card"/><text y="65" text-anchor="middle" class="txt small">MON</text><g transform="translate(0 230) scale(.95)"><use href="#coffee"/></g></g>
-  <g transform="translate(355 440)"><rect x="-75" y="0" width="150" height="420" rx="22" class="card"/><text y="65" text-anchor="middle" class="txt small">TUE</text><g transform="translate(0 230) scale(.95)"><use href="#coffee"/></g></g>
-  <g transform="translate(540 440)"><rect x="-75" y="0" width="150" height="420" rx="22" class="card"/><text y="65" text-anchor="middle" class="txt small">WED</text><g transform="translate(0 230) scale(.95)"><use href="#coffee"/></g></g>
-  <g transform="translate(725 440)"><rect x="-75" y="0" width="150" height="420" rx="22" class="card"/><text y="65" text-anchor="middle" class="txt small">THU</text><g transform="translate(0 230) scale(.95)"><use href="#coffee"/></g></g>
-  <g transform="translate(910 440)"><rect x="-75" y="0" width="150" height="420" rx="22" class="card"/><text y="65" text-anchor="middle" class="txt small">FRI</text><g transform="translate(0 230) scale(.95)"><use href="#coffee"/></g></g>
- </g>
- <text x="540" y="1060" text-anchor="middle" class="txt headline">$7 × 5 = $35</text>
- <text x="540" y="1150" text-anchor="middle" class="txt small">SPENT EVERY WEEK</text><text x="540" y="1290" text-anchor="middle" class="txt headline">$1,750 / YEAR</text>
- <g transform="translate(540 1390) scale(.5)"><use href="#person"/></g>
-</g>
-<!-- Scene 2: 50 weeks and annual spend -->
-<g id="s2" class="scene">
- <text x="540" y="280" text-anchor="middle" class="txt headline">THE YEARLY TOTAL</text>
- <g id="calendar" transform="translate(540 700)">
-  <rect x="-300" y="-250" width="600" height="500" rx="28" class="card"/>
-  <path class="ink" d="M-300 -125H300M-180 -290V-210M180 -290V-210"/>
-  <text y="-160" text-anchor="middle" class="txt headline">50 WEEKS</text>
-  <g fill="#e8b653" stroke="#25231f" stroke-width="5"><rect x="-220" y="-70" width="110" height="90" rx="12"/><rect x="-55" y="-70" width="110" height="90" rx="12"/><rect x="110" y="-70" width="110" height="90" rx="12"/><rect x="-220" y="75" width="110" height="90" rx="12"/><rect x="-55" y="75" width="110" height="90" rx="12"/></g>
- </g>
- <text x="540" y="1130" text-anchor="middle" class="txt number">$1,750</text>
- <text x="540" y="1210" text-anchor="middle" class="txt small">COFFEE SPENDING PER YEAR</text>
-</g>
-<!-- Scene 3: redirect money to investing -->
-<g id="s3" class="scene">
- <text x="540" y="280" text-anchor="middle" class="txt headline">WHAT IF YOU INVESTED IT?</text>
- <g transform="translate(260 690) scale(.72)"><use href="#person"/></g>
- <g id="movingCoin" transform="translate(430 740)"><use href="#coin"/></g>
- <path class="pencil draw" pathLength="1" d="M480 740Q610 640 730 740"/>
- <path class="ink" d="M700 760h210v300q-105 90-210 0zM750 760v-75h110v75"/>
- <text x="805" y="920" text-anchor="middle" class="txt small">INVEST</text>
- <text x="540" y="1200" text-anchor="middle" class="txt headline">$35 EACH WEEK</text>
- <text x="540" y="1290" text-anchor="middle" class="txt small">50 WEEKS A YEAR · 15 YEARS</text>
-</g>
-<!-- Scene 4: investment grows -->
-<g id="s4" class="scene">
- <text x="540" y="280" text-anchor="middle" class="txt headline">LET TIME DO THE WORK</text>
- <path class="ink" d="M160 1030V420H920"/>
- <path id="growthLine" class="pencil draw" pathLength="1" d="M210 960L365 900L510 820L650 690L790 540L875 455"/>
- <g fill="#e8b653" stroke="#25231f" stroke-width="6"><circle cx="365" cy="900" r="18"/><circle cx="510" cy="820" r="18"/><circle cx="650" cy="690" r="18"/><circle cx="790" cy="540" r="18"/></g>
- <text x="540" y="1190" text-anchor="middle" class="txt number">$45,500</text>
- <text x="540" y="1270" text-anchor="middle" class="txt small">ILLUSTRATIVE VALUE AFTER 15 YEARS</text>
- <text x="540" y="1360" text-anchor="middle" class="txt small">YOU INVESTED $26,250</text>
- <text x="540" y="1430" text-anchor="middle" class="txt small">APPROX. $19,250 GROWTH</text>
-</g>
-<!-- Scene 5: returns are uncertain -->
-<g id="s5" class="scene">
- <text x="540" y="280" text-anchor="middle" class="txt headline">RETURNS ARE NOT GUARANTEED</text>
- <path class="ink" d="M150 1000V440H930"/>
- <path id="riskLine" class="pencil draw" pathLength="1" d="M200 570L340 700L470 610L600 820L735 690L875 900"/>
- <g transform="translate(285 1220)"><circle r="46" class="card"/><path class="ink thin" d="M-22 0H22"/><text y="105" text-anchor="middle" class="txt small">FEES</text></g>
- <g transform="translate(540 1220)"><circle r="46" class="card"/><path class="ink thin" d="M0 -25V25M-25 0H25"/><text y="105" text-anchor="middle" class="txt small">TAXES</text></g>
- <g transform="translate(795 1220)"><circle r="46" class="card"/><path class="ink thin" d="M-22 -25L22 25M22 -25L-22 25"/><text y="105" text-anchor="middle" class="txt small">INFLATION</text></g>
-</g>
-<!-- Scene 6: purposeful spending -->
-<g id="s6" class="scene">
- <text x="540" y="280" text-anchor="middle" class="txt headline">KEEP THE COFFEE.</text>
- <g transform="translate(280 680) scale(.75)"><use href="#person"/></g>
- <g transform="translate(280 1040) scale(1.25)"><use href="#coffee"/></g>
- <path class="pencil draw" pathLength="1" d="M440 820H650l-45 -45m45 45l-45 45"/>
- <path class="ink" d="M710 670h210v290q-105 95-210 0zM755 670v-80h120v80"/>
- <text x="815" y="835" text-anchor="middle" class="txt small">YOUR</text><text x="815" y="890" text-anchor="middle" class="txt small">GOAL</text>
- <text x="540" y="1260" text-anchor="middle" class="txt headline">SPEND WITH PURPOSE</text>
- <text x="540" y="1350" text-anchor="middle" class="txt small">SAVE FOR WHAT MATTERS</text>
-</g>
-<!-- Scene 7: clear follow / action ending -->
-<g id="s7" class="scene">
- <text x="540" y="280" text-anchor="middle" class="txt headline">ONE SMALL CHANGE.</text>
- <g transform="translate(300 690) scale(.78)"><use href="#person"/></g>
- <path class="pencil draw" pathLength="1" d="M430 850H620l-42 -42m42 42l-42 42"/>
- <path class="ink" d="M690 680h220v300q-110 100-220 0zM745 680v-80h110v80"/>
- <text x="800" y="830" text-anchor="middle" class="txt small">YOUR</text><text x="800" y="890" text-anchor="middle" class="txt small">FUTURE</text>
- <text x="540" y="1210" text-anchor="middle" class="txt headline">MAKE IT COUNT.</text>
- <text x="540" y="1310" text-anchor="middle" class="txt small">FOLLOW THE MONEY STICKMAN</text>
- <text x="540" y="1390" text-anchor="middle" class="txt small">FOR SIMPLE MONEY LESSONS</text>
-</g>
-<g id="captions"><rect x="70" y="1550" width="940" height="210" rx="28"/><text id="cap1" x="540" y="1640" text-anchor="middle" font-size="48"></text><text id="cap2" x="540" y="1705" text-anchor="middle" font-size="48"></text></g>
+<text x="540" y="110" text-anchor="middle" class="txt label">THE MONEY STICKMAN</text><path d="M140 150H940" stroke="#b7ae9e" stroke-width="3"/>
+<g id="scene"></g>
+<g id="captions"><rect x="65" y="1545" width="950" height="225" rx="28"/><text id="cap1" x="540" y="1640" text-anchor="middle" font-size="48"></text><text id="cap2" x="540" y="1705" text-anchor="middle" font-size="48"></text></g>
 </svg>
 <script>
 (async()=>{
- const params=new URLSearchParams(location.search);let tl={segments:[]};try{const u=params.get('timeline');if(u)tl=await(await fetch(u)).json()}catch(e){}
- const sceneIds=['s0','s1','s3','s4','s5','s6','s7'],scenes=sceneIds.map(x=>document.getElementById(x)),cap1=document.getElementById('cap1'),cap2=document.getElementById('cap2');
- function captionChunks(text){const w=(text||'').replace(/[^\w$%.,'-]+/g,' ').trim().split(/\s+/);const out=[];for(let i=0;i<w.length;i+=5)out.push(w.slice(i,i+5).join(' '));return out;}
- function fit(el,max=840){let size=48;el.setAttribute('font-size',size);while(el.getComputedTextLength()>max&&size>32){size-=2;el.setAttribute('font-size',size)}}
- function revealDraw(scene,q){scene.querySelectorAll('path').forEach((p)=>{p.setAttribute('pathLength','1');p.style.strokeDasharray='1';p.style.strokeDashoffset=String(1-Math.min(1,Math.max(0,(q-.08)/.62)));});}
- window.renderAt=(t)=>{
-  if(!tl.segments||!tl.segments.length)return;
+ const params=new URLSearchParams(location.search);let tl={segments:[]};
+ try{const u=params.get('timeline');if(u)tl=await(await fetch(u)).json()}catch(e){}
+ const scene=document.getElementById('scene'),cap1=document.getElementById('cap1'),cap2=document.getElementById('cap2');
+ const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ const wrap=(x,y,scale,body)=>'<g transform="translate('+x+' '+y+') scale('+scale+')">'+body+'</g>';
+ function icon(type){
+  if(type==='coffee')return wrap(0,0,1,'<use href="#mug"/>');
+  if(type==='house')return '<path class="ink" d="M-110 0L0 -100L110 0V125H-110Z M-35 125V35H35V125"/>';
+  if(type==='card')return '<rect x="-125" y="-80" width="250" height="160" rx="18" fill="#e8b653" stroke="#25231f" stroke-width="9"/><path class="ink" d="M-120 -25H120M-75 35H-15"/>';
+  if(type==='chart')return '<path class="ink" d="M-130 100V-110M-130 100H145"/><path class="ink draw" d="M-105 65L-50 25L0 40L55 -35L115 -95"/><path class="ink" d="M75 -95H115V-55"/>';
+  if(type==='warning')return '<path d="M0 -125L130 110H-130Z" fill="#e8b653" stroke="#25231f" stroke-width="9"/><path class="ink" d="M0 -45V35M0 75V78"/>';
+  if(type==='target')return '<circle r="115" fill="none" stroke="#25231f" stroke-width="9"/><circle r="70" fill="none" stroke="#25231f" stroke-width="9"/><circle r="25" fill="#e8b653" stroke="#25231f" stroke-width="8"/>';
+  return '<path class="ink" d="M-100 -55Q0 -120 100 -55V80Q0 135 -100 80Z M-100 -20H100"/><use href="#coin" x="0" y="30"/>';
+ }
+ function build(s,i){
+  const kind=s.scene_type||'explainer', entity=(s.entities||[]).find(x=>['coffee','house','card','chart','warning','target','wallet'].includes(x))||'wallet';
+  const nums=s.emphasis||[], headline=esc(s.headline||'THE MONEY IDEA');
+  let object=icon(entity);
+  if(kind==='risk')object=icon('warning');
+  if(kind==='growth'||kind==='investing')object=icon('chart');
+  if(kind==='housing')object=icon('house');
+  if(kind==='debt')object=icon('card');
+  if(kind==='goal')object=icon('target');
+  const number=nums[0]?'<text x="0" y="250" text-anchor="middle" class="txt number">'+esc(nums[0])+'</text>':'';
+  const secondary=nums[1]?'<text x="0" y="315" text-anchor="middle" class="txt label">'+esc(nums[1])+'</text>':'';
+  const props=kind==='risk'?'FEES · TAXES · INFLATION':kind==='debt'?'BALANCE · INTEREST · PAYMENTS':kind==='housing'?'PLAN THE LARGE EXPENSES':kind==='growth'?'TIME + CONSISTENCY':kind==='investing'?'PUT MONEY TO WORK':kind==='budget'?'SMALL CHOICES ADD UP':kind==='goal'?'A PLAN YOU CAN FOLLOW':'BREAK IT DOWN';
+  return '<text x="540" y="285" text-anchor="middle" class="txt head">'+headline+'</text>'+
+   '<g transform="translate(270 760) scale(.72)"><use href="#person"/></g>'+
+   '<g id="hero" transform="translate(700 730)"><g class="draw">'+object+'</g></g>'+
+   '<path class="ink draw" d="M385 780Q500 680 555 735"/>'+
+   '<text x="540" y="1190" text-anchor="middle" class="txt label">'+esc(props)+'</text>'+
+   '<g>'+number+secondary+'</g>'+
+   '<text x="540" y="1435" text-anchor="middle" class="txt label">'+esc((s.entities||[]).slice(0,3).join('  ·  ').toUpperCase())+'</text>';
+ }
+ function chunks(text){
+  const words=String(text||'').trim().split(/\s+/);const out=[];
+  for(let i=0;i<words.length;i+=5)out.push(words.slice(i,i+5).join(' '));
+  return out;
+ }
+ function fit(el,max=850){let size=48;el.setAttribute('font-size',size);while(el.getComputedTextLength()>max&&size>30){size-=2;el.setAttribute('font-size',size)}}
+ window.renderAt=t=>{
+  if(!tl.segments?.length)return;
   let i=tl.segments.findIndex(x=>t>=x.start&&t<x.end);if(i<0)i=tl.segments.length-1;
-  const s=tl.segments[i],duration=Math.max(.01,s.end-s.start),q=Math.max(0,Math.min(1,(t-s.start)/duration)),scene=scenes[Math.min(i,6)];
-  scenes.forEach((el,j)=>{el.style.display=j===i?'inline':'none';});
-  revealDraw(scene,q);
-  if(i===0){const cup=document.getElementById('heroCup');cup.setAttribute('transform','translate(535 '+(850-18*Math.sin(q*Math.PI*4))+') scale(1.35)');}
-  if(i===1){const cards=document.getElementById('weekdayCards');cards.setAttribute('transform','translate(0 '+(12*Math.sin(q*Math.PI*4))+')');}
-  if(i===2){document.getElementById('calendar').setAttribute('transform','translate(540 700) scale('+(0.96+0.04*q)+')');}
-  if(i===2){const coin=document.getElementById('movingCoin');coin.setAttribute('transform','translate('+(430+300*q)+' '+(740-30*Math.sin(q*Math.PI))+')');}
-  const chunks=captionChunks(s.text),n=Math.min(Math.max(0,chunks.length-1),Math.floor(q*chunks.length));let a=chunks[n]||'',b='';
-  // One short caption phrase at a time; do not show future words early.
-  cap1.textContent=a;cap2.textContent=b;fit(cap1);fit(cap2);document.getElementById('captions').setAttribute('opacity',q<.025?0:1);
+  const s=tl.segments[i],d=Math.max(.01,s.end-s.start),q=Math.max(0,Math.min(1,(t-s.start)/d));
+  if(scene.dataset.index!==String(i)){scene.innerHTML=build(s.scene||{},i);scene.dataset.index=String(i);}
+  scene.querySelectorAll('.draw').forEach(p=>{p.style.strokeDasharray='1';p.style.strokeDashoffset=String(1-Math.min(1,Math.max(0,(q-.04)/.48)));});
+  const h=scene.querySelector('#hero');if(h)h.setAttribute('transform','translate(700 '+(730-12*Math.sin(q*Math.PI*2))+')');
+  const parts=chunks(s.text),n=Math.min(parts.length-1,Math.floor(q*parts.length));
+  cap1.textContent=parts[n]||'';cap2.textContent=parts[n+1]||'';fit(cap1);fit(cap2);
+  document.getElementById('captions').setAttribute('opacity',q<.02?0:1);
  };
  window.renderAt(0);
 })();
