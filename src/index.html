@@ -97,7 +97,7 @@
  const caption=document.getElementById('captionText');
  const caption2=document.getElementById('captionText2');
  const captionBg=document.getElementById('captionBg');
- function wrap(text){const words=text.split(/\s+/);let a='',b='';for(const word of words){if((a+' '+word).trim().length<29)a=(a+' '+word).trim();else b=(b+' '+word).trim()}return [a,b]}
+ function captionPhrase(text,local){const words=text.split(/\s+/);const groups=[];for(let i=0;i<words.length;i+=4)groups.push(words.slice(i,i+4).join(' '));const idx=Math.min(groups.length-1,Math.floor(local*groups.length));return groups.slice(idx,idx+2)}
  window.renderAt=(time)=>{
   if(!timeline.segments.length)return;
   let index=timeline.segments.findIndex(s=>time>=s.start&&time<s.end);
