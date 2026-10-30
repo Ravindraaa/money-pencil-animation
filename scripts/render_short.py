@@ -6,6 +6,9 @@ import math
 import shutil
 import subprocess
 import sys
+import threading
+from http.server import ThreadingHTTPServer, SimpleHTTPRequestHandler
+from functools import partial
 from pathlib import Path
 
 import edge_tts
@@ -76,19 +79,24 @@ def main() -> int:
     run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat_file),
          "-c:a", "libmp3lame", "-q:a", "3", str(narration)])
 
-    html = (ROOT / "src/index.html").resolve().as_uri() + "?timeline=" + timeline_path.as_uri()
+    handler = partial(SimpleHTTPRequestHandler, directory=str(ROOT))
+    server = ThreadingHTTPServer(("127.0.0.1", 8765), handler)
+    server_thread = threading.Thread(target=server.serve_forever, daemon=True)
+    server_thread.start()
     frame_count = math.ceil(total_duration * FPS)
 
     with sync_playwright() as playwright:
         browser = playwright.chromium.launch(headless=True)
         page = browser.new_page(viewport={"width": WIDTH, "height": HEIGHT}, device_scale_factor=1)
-        page.goto(html, wait_until="load")
+        page.goto("http://127.0.0.1:8765/src/index.html?timeline=/work/timeline.json", wait_until="load")
         page.wait_for_function("window.renderAt !== undefined")
         for frame in range(frame_count):
             timestamp = frame / FPS
             page.evaluate("(t) => window.renderAt(t)", timestamp)
             page.screenshot(path=str(frames_dir / f"frame_{frame:06d}.png"))
         browser.close()
+    server.shutdown()
+    server.server_close()
 
     silent_video = WORK / "silent.mp4"
     final_video = OUT / "money-stickman-short-01.mp4"
