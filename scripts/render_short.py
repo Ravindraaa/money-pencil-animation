@@ -109,6 +109,14 @@ def main() -> int:
     visual_beats = SPEC.get("visuals", [])
     for index, (item, scene) in enumerate(zip(timeline, storyboard["scenes"])):
         item["scene"] = {**scene, **(visual_beats[index] if index < len(visual_beats) else {}), "visual_engine": SPEC.get("visual_engine", "motion_comic")}
+        beats = SPEC.get("visual_beats", [])
+        item["visual_beats"] = beats[index] if index < len(beats) else []
+        # Resolve each visual cue against Edge TTS word boundaries, not estimated sentence timing.
+        normalized = [word["text"].lower().strip(".,!?;:\"'()") for word in item["words"]]
+        for beat in item["visual_beats"]:
+            phrase = [part.lower().strip(".,!?;:\"'()") for part in beat.get("at", "").split()]
+            cue_index = next((j for j in range(len(normalized) - len(phrase) + 1) if phrase and normalized[j:j + len(phrase)] == phrase), None)
+            beat["start"] = item["words"][cue_index]["start"] if cue_index is not None else item["start"]
         storyboard["scenes"][index] = item["scene"]
     storyboard_path = OUT / f"{OUTPUT_NAME}-storyboard.json"
     storyboard_path.write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
