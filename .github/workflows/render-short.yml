@@ -55,8 +55,8 @@ jobs:
         run: python -m unittest discover -s tests -v
       - name: Render video
         env:
-          SHORT_SPEC: ${{ github.event.inputs.script_file || 'scripts/short_01.json' }}
-          OUTPUT_NAME: ${{ github.event.inputs.output_name || 'money-stickman-short-01' }}
+          SHORT_SPEC: ${{ github.event.inputs.script_file || 'scripts/short_70k.json' }}
+          OUTPUT_NAME: ${{ github.event.inputs.output_name || 'money-stickman-70k' }}
         run: npm run render:short
       - name: Validate MP4
         env:
