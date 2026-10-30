@@ -60,15 +60,15 @@ jobs:
         run: npm run render:short
       - name: Validate MP4
         env:
-          OUTPUT_NAME: ${{ github.event.inputs.output_name || 'money-stickman-short-01' }}
+          OUTPUT_NAME: ${{ github.event.inputs.output_name || 'money-stickman-70k' }}
         run: python scripts/qa_video.py "output/${OUTPUT_NAME}.mp4"
       - name: Upload review files
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ github.event.inputs.output_name || 'money-stickman-short-01' }}
+          name: ${{ github.event.inputs.output_name || 'money-stickman-70k' }}
           path: |
-            output/${{ github.event.inputs.output_name || 'money-stickman-short-01' }}.mp4
-            output/${{ github.event.inputs.output_name || 'money-stickman-short-01' }}-metadata.json
-            output/${{ github.event.inputs.output_name || 'money-stickman-short-01' }}-storyboard.json
+            output/${{ github.event.inputs.output_name || 'money-stickman-70k' }}.mp4
+            output/${{ github.event.inputs.output_name || 'money-stickman-70k' }}-metadata.json
+            output/${{ github.event.inputs.output_name || 'money-stickman-70k' }}-storyboard.json
           if-no-files-found: error
           retention-days: 14
