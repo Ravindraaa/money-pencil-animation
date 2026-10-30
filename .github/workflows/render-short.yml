@@ -6,11 +6,11 @@ on:
       script_file:
         description: 'Script JSON file under scripts/ (for example short_01.json)'
         required: true
-        default: 'scripts/short_01.json'
+        default: 'scripts/short_70k.json'
       output_name:
         description: 'Output MP4 base name (without extension)'
         required: true
-        default: 'money-stickman-short-01'
+        default: 'money-stickman-70k'
   pull_request:
     branches: [main]
     paths:
