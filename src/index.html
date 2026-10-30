@@ -1,81 +1,128 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Money Stickman</title>
-<style>html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f7f4ec}#stage{width:100vw;height:100vh;display:block}.ink{fill:none;stroke:#292722;stroke-width:12;stroke-linecap:round;stroke-linejoin:round}.thin{stroke-width:7}.txt{font-family:Arial,sans-serif;fill:#292722;font-weight:800}.small{font-size:36px}.big{font-size:100px}.scene{display:none}.accent{fill:#d69a37;stroke:#292722;stroke-width:7}.green{fill:#a9b98b;stroke:#292722;stroke-width:7}.paper{fill:#f7f4ec;stroke:#292722;stroke-width:9}</style></head>
-<body><svg id="stage" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg">
-<defs><pattern id="grain" width="24" height="24" patternUnits="userSpaceOnUse"><path d="M2 5h3M14 18h2" stroke="#b9b2a5" opacity=".2"/></pattern>
-<g id="stickman" class="ink"><circle cx="0" cy="0" r="58" fill="#f7f4ec"/><path d="M-25 -10q12 -12 24 0M12 -10q12 -12 24 0M-15 25q15 12 30 0M0 58v180M0 105l-95 95M0 105l95 95M0 238l-75 130M0 238l75 130"/></g>
-<g id="cup"><path class="paper" d="M-55 -45h110l-12 115h-86z"/><path class="ink thin" d="M55 -30h28q18 0 12 28l-20 35H48"/><path class="ink thin" d="M-25 -65q-20 -25 0 -45M10 -65q-20 -25 0 -45"/></g>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>The Money Stickman — Coffee Habit</title>
+<style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f7f4ec}
+#stage{width:100vw;height:100vh;display:block;background:#f7f4ec}
+.ink{fill:none;stroke:#25231f;stroke-width:11;stroke-linecap:round;stroke-linejoin:round}
+.pencil{fill:none;stroke:#25231f;stroke-width:9;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:0}
+.thin{stroke-width:6}.txt{font-family:Arial,sans-serif;fill:#25231f;font-weight:800}
+.label{font-size:38px;letter-spacing:2px}.headline{font-size:72px}.number{font-size:112px}.small{font-size:34px}
+.scene{display:none}.card{fill:#fffdf7;stroke:#25231f;stroke-width:7}.gold{fill:#e8b653;stroke:#25231f;stroke-width:7}.green{fill:#b8c69a;stroke:#25231f;stroke-width:7}.dark{fill:#25231f}
+#captions rect{fill:#25231f;opacity:.97}#cap1,#cap2{fill:#fffdf7;font-family:Arial,sans-serif;font-weight:800}
+</style></head><body>
+<svg id="stage" viewBox="0 0 1080 1920" preserveAspectRatio="xMidYMid meet" xmlns="http://www.w3.org/2000/svg">
+<defs>
+ <pattern id="paper" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="3" cy="4" r="1" fill="#bdb5a6" opacity=".24"/></pattern>
+ <g id="person" class="ink"><circle cx="0" cy="0" r="54" fill="#f7f4ec"/><path d="M-24 -8q12 -13 24 0M10 -8q12 -13 24 0M-16 22q16 14 32 0M0 54v205M0 105l-90 100M0 105l90 100M0 259l-76 140M0 259l76 140"/></g>
+ <g id="coffee" class="ink"><path d="M-48 -38h96l-10 105h-76z" fill="#fffdf7"/><path d="M48 -24h22q24 0 14 30L65 35H43"/><path class="thin" d="M-22 -54q-22 -22 0 -45M12 -54q-22 -22 0 -45"/></g>
+ <g id="coin"><circle r="43" class="gold"/><text y="15" text-anchor="middle" class="txt small">$</text></g>
 </defs>
-<rect width="1080" height="1920" fill="#f7f4ec"/><rect width="1080" height="1920" fill="url(#grain)"/>
-<text x="540" y="125" text-anchor="middle" class="txt small" letter-spacing="7" fill="#82796c">THE MONEY STICKMAN</text><path d="M180 160H900" stroke="#aaa194" stroke-width="3"/>
-<!-- 0: actual coffee purchase and $7 menu -->
+<rect width="1080" height="1920" fill="#f7f4ec"/><rect width="1080" height="1920" fill="url(#paper)"/>
+<text x="540" y="112" text-anchor="middle" class="txt label">THE MONEY STICKMAN</text><path d="M140 150H940" stroke="#b7ae9e" stroke-width="3"/>
+<!-- Scene 0: buy a coffee for $7 -->
 <g id="s0" class="scene">
- <path class="ink" d="M120 1110H960M190 1110V470H890V1110"/>
- <rect x="650" y="520" width="205" height="170" rx="12" class="green"/><text x="752" y="585" text-anchor="middle" class="txt small">COFFEE</text><text x="752" y="655" text-anchor="middle" class="txt big">$7</text>
- <g id="coffeeCup" transform="translate(520 930) scale(1.8)"><use href="#cup"/></g>
- <g id="barista" transform="translate(270 700) scale(.85)"><use href="#stickman"/></g>
- <g id="buyer" transform="translate(500 700) scale(.85)"><use href="#stickman"/></g>
- <path id="handCoffee" class="ink" d="M500 805Q530 850 520 875"/>
- <text x="540" y="1300" text-anchor="middle" class="txt big">ONE COFFEE = $7</text>
+ <text x="540" y="280" text-anchor="middle" class="txt headline">THE DAILY COFFEE</text>
+ <path class="pencil draw" pathLength="1" d="M120 1030H960M170 1030V450H910V1030"/>
+ <g transform="translate(355 540)"><use href="#person"/></g>
+ <g transform="translate(780 565) scale(.78)"><use href="#person"/></g>
+ <path class="ink" d="M355 645Q420 690 500 790"/>
+ <g id="heroCup" transform="translate(535 850) scale(1.35)"><use href="#coffee"/></g>
+ <rect x="650" y="390" width="250" height="170" rx="20" class="green"/>
+ <text x="775" y="445" text-anchor="middle" class="txt small">COFFEE</text><text x="775" y="535" text-anchor="middle" class="txt number" font-size="86">$7</text>
+ <text x="540" y="1190" text-anchor="middle" class="txt headline">ONE CUP. SEVEN DOLLARS.</text>
+ <text x="540" y="1270" text-anchor="middle" class="txt small">A SMALL DAILY HABIT</text>
 </g>
-<!-- 1: five weekday coffees -->
+<!-- Scene 1: five weekday coffees -->
 <g id="s1" class="scene">
- <text x="540" y="400" text-anchor="middle" class="txt big">MON  TUE  WED  THU  FRI</text>
- <path class="ink" d="M120 500H960"/>
- <g id="cups5">
- <g transform="translate(190 770) scale(.9)"><use href="#cup"/></g><g transform="translate(365 770) scale(.9)"><use href="#cup"/></g><g transform="translate(540 770) scale(.9)"><use href="#cup"/></g><g transform="translate(715 770) scale(.9)"><use href="#cup"/></g><g transform="translate(890 770) scale(.9)"><use href="#cup"/></g></g>
- <text x="540" y="1080" text-anchor="middle" class="txt big">$7 × 5 = $35</text><text x="540" y="1170" text-anchor="middle" class="txt small">EVERY WEEKDAY</text>
- <g transform="translate(540 1390) scale(.65)"><use href="#stickman"/></g>
+ <text x="540" y="280" text-anchor="middle" class="txt headline">FIVE WORKDAYS</text>
+ <g id="weekdayCards">
+  <g transform="translate(170 440)"><rect x="-75" y="0" width="150" height="420" rx="22" class="card"/><text y="65" text-anchor="middle" class="txt small">MON</text><g transform="translate(0 230) scale(.95)"><use href="#coffee"/></g></g>
+  <g transform="translate(355 440)"><rect x="-75" y="0" width="150" height="420" rx="22" class="card"/><text y="65" text-anchor="middle" class="txt small">TUE</text><g transform="translate(0 230) scale(.95)"><use href="#coffee"/></g></g>
+  <g transform="translate(540 440)"><rect x="-75" y="0" width="150" height="420" rx="22" class="card"/><text y="65" text-anchor="middle" class="txt small">WED</text><g transform="translate(0 230) scale(.95)"><use href="#coffee"/></g></g>
+  <g transform="translate(725 440)"><rect x="-75" y="0" width="150" height="420" rx="22" class="card"/><text y="65" text-anchor="middle" class="txt small">THU</text><g transform="translate(0 230) scale(.95)"><use href="#coffee"/></g></g>
+  <g transform="translate(910 440)"><rect x="-75" y="0" width="150" height="420" rx="22" class="card"/><text y="65" text-anchor="middle" class="txt small">FRI</text><g transform="translate(0 230) scale(.95)"><use href="#coffee"/></g></g>
+ </g>
+ <text x="540" y="1060" text-anchor="middle" class="txt headline">$7 × 5 = $35</text>
+ <text x="540" y="1150" text-anchor="middle" class="txt small">SPENT EVERY WEEK</text>
+ <g transform="translate(540 1390) scale(.5)"><use href="#person"/></g>
 </g>
-<!-- 2: calendar and annual spend -->
+<!-- Scene 2: 50 weeks and annual spend -->
 <g id="s2" class="scene">
- <rect x="260" y="430" width="560" height="580" rx="24" class="paper"/><path class="ink" d="M260 570H820M390 400V500M690 400V500"/>
- <text x="540" y="525" text-anchor="middle" class="txt big">50 WEEKS</text>
- <g fill="#d69a37" stroke="#292722" stroke-width="5"><rect x="330" y="630" width="110" height="100" rx="12"/><rect x="485" y="630" width="110" height="100" rx="12"/><rect x="640" y="630" width="110" height="100" rx="12"/><rect x="330" y="780" width="110" height="100" rx="12"/><rect x="485" y="780" width="110" height="100" rx="12"/></g>
- <text x="540" y="1130" text-anchor="middle" class="txt big">$1,750</text><text x="540" y="1200" text-anchor="middle" class="txt small">COFFEE SPENDING / YEAR</text>
- <g transform="translate(540 1450) scale(.55)"><use href="#stickman"/></g>
+ <text x="540" y="280" text-anchor="middle" class="txt headline">THE YEARLY TOTAL</text>
+ <g id="calendar" transform="translate(540 700)">
+  <rect x="-300" y="-250" width="600" height="500" rx="28" class="card"/>
+  <path class="ink" d="M-300 -125H300M-180 -290V-210M180 -290V-210"/>
+  <text y="-160" text-anchor="middle" class="txt headline">50 WEEKS</text>
+  <g fill="#e8b653" stroke="#25231f" stroke-width="5"><rect x="-220" y="-70" width="110" height="90" rx="12"/><rect x="-55" y="-70" width="110" height="90" rx="12"/><rect x="110" y="-70" width="110" height="90" rx="12"/><rect x="-220" y="75" width="110" height="90" rx="12"/><rect x="-55" y="75" width="110" height="90" rx="12"/></g>
+ </g>
+ <text x="540" y="1130" text-anchor="middle" class="txt number">$1,750</text>
+ <text x="540" y="1210" text-anchor="middle" class="txt small">COFFEE SPENDING PER YEAR</text>
 </g>
-<!-- 3: divert $35 into investment -->
+<!-- Scene 3: redirect money to investing -->
 <g id="s3" class="scene">
- <g transform="translate(280 700) scale(.75)"><use href="#stickman"/></g>
- <path class="ink" d="M420 830Q520 750 650 850"/>
- <circle id="coin" cx="520" cy="770" r="54" class="accent"/><text x="520" y="790" text-anchor="middle" class="txt small">$35</text>
- <path class="ink" d="M700 800h190v220q-95 90-190 0z"/><path class="ink thin" d="M740 800v-65h110v65"/>
- <text x="795" y="930" text-anchor="middle" class="txt small">INVEST</text>
- <text x="540" y="1210" text-anchor="middle" class="txt big">$35 / WEEK</text><text x="540" y="1290" text-anchor="middle" class="txt small">50 WEEKS × 15 YEARS</text>
+ <text x="540" y="280" text-anchor="middle" class="txt headline">WHAT IF YOU INVESTED IT?</text>
+ <g transform="translate(260 690) scale(.72)"><use href="#person"/></g>
+ <g id="movingCoin" transform="translate(430 740)"><use href="#coin"/></g>
+ <path class="pencil draw" pathLength="1" d="M480 740Q610 640 730 740"/>
+ <path class="ink" d="M700 760h210v300q-105 90-210 0zM750 760v-75h110v75"/>
+ <text x="805" y="920" text-anchor="middle" class="txt small">INVEST</text>
+ <text x="540" y="1200" text-anchor="middle" class="txt headline">$35 EACH WEEK</text>
+ <text x="540" y="1290" text-anchor="middle" class="txt small">50 WEEKS A YEAR · 15 YEARS</text>
 </g>
-<!-- 4: compound growth -->
+<!-- Scene 4: investment grows -->
 <g id="s4" class="scene">
- <path class="ink" d="M170 1080V470H920M210 1020L390 930L560 820L730 650L875 500"/>
- <path class="ink" d="M835 500l45 0-5 48"/>
- <g fill="#d69a37" stroke="#292722" stroke-width="6"><circle cx="390" cy="930" r="18"/><circle cx="560" cy="820" r="18"/><circle cx="730" cy="650" r="18"/></g>
- <text x="540" y="1230" text-anchor="middle" class="txt big">$45,500</text><text x="540" y="1310" text-anchor="middle" class="txt small">AFTER 15 YEARS*</text>
- <text x="540" y="1400" text-anchor="middle" class="txt small">YOU PUT IN  $26,250</text><text x="540" y="1470" text-anchor="middle" class="txt small">GROWTH  ~$19,250</text>
+ <text x="540" y="280" text-anchor="middle" class="txt headline">LET TIME DO THE WORK</text>
+ <path class="ink" d="M160 1030V420H920"/>
+ <path id="growthLine" class="pencil draw" pathLength="1" d="M210 960L365 900L510 820L650 690L790 540L875 455"/>
+ <g fill="#e8b653" stroke="#25231f" stroke-width="6"><circle cx="365" cy="900" r="18"/><circle cx="510" cy="820" r="18"/><circle cx="650" cy="690" r="18"/><circle cx="790" cy="540" r="18"/></g>
+ <text x="540" y="1190" text-anchor="middle" class="txt number">$45,500</text>
+ <text x="540" y="1270" text-anchor="middle" class="txt small">ILLUSTRATIVE VALUE AFTER 15 YEARS</text>
+ <text x="540" y="1360" text-anchor="middle" class="txt small">YOU INVESTED $26,250</text>
+ <text x="540" y="1430" text-anchor="middle" class="txt small">APPROX. $19,250 GROWTH</text>
 </g>
-<!-- 5: uncertainty, down markets, costs -->
+<!-- Scene 5: returns are uncertain -->
 <g id="s5" class="scene">
- <path class="ink" d="M170 1050V500H910M210 650l150 100 130-80 150 180 140-130 170 160"/>
- <text x="540" y="400" text-anchor="middle" class="txt big">7% IS NOT GUARANTEED</text>
- <g class="txt small" text-anchor="middle"><text x="300" y="1250">FEES</text><text x="540" y="1250">TAXES</text><text x="780" y="1250">INFLATION</text></g>
- <g class="ink thin"><circle cx="300" cy="1160" r="45"/><path d="M280 1160h40M540 1115v90M500 1160h80M780 1115l-35 90M745 1115l70 90"/></g>
+ <text x="540" y="280" text-anchor="middle" class="txt headline">RETURNS ARE NOT GUARANTEED</text>
+ <path class="ink" d="M150 1000V440H930"/>
+ <path id="riskLine" class="pencil draw" pathLength="1" d="M200 570L340 700L470 610L600 820L735 690L875 900"/>
+ <g transform="translate(285 1220)"><circle r="46" class="card"/><path class="ink thin" d="M-22 0H22"/><text y="105" text-anchor="middle" class="txt small">FEES</text></g>
+ <g transform="translate(540 1220)"><circle r="46" class="card"/><path class="ink thin" d="M0 -25V25M-25 0H25"/><text y="105" text-anchor="middle" class="txt small">TAXES</text></g>
+ <g transform="translate(795 1220)"><circle r="46" class="card"/><path class="ink thin" d="M-22 -25L22 25M22 -25L-22 25"/><text y="105" text-anchor="middle" class="txt small">INFLATION</text></g>
 </g>
-<!-- 6: keep coffee, choose a valued goal -->
+<!-- Scene 6: purposeful spending -->
 <g id="s6" class="scene">
- <g transform="translate(300 760) scale(1.15)"><use href="#stickman"/></g><g transform="translate(300 1010) scale(1.05)"><use href="#cup"/></g>
- <path class="ink" d="M540 900H700l-30 -30m30 30l-30 30"/>
- <path class="ink" d="M760 800h150v160q-75 75-150 0zM790 800v-55h90v55"/>
- <text x="835" y="900" text-anchor="middle" class="txt small">GOAL</text>
- <text x="540" y="1250" text-anchor="middle" class="txt big">SPEND WITH PURPOSE</text><text x="540" y="1340" text-anchor="middle" class="txt small">SAVE FOR WHAT MATTERS</text>
+ <text x="540" y="280" text-anchor="middle" class="txt headline">KEEP THE COFFEE.</text>
+ <g transform="translate(280 680) scale(.75)"><use href="#person"/></g>
+ <g transform="translate(280 1040) scale(1.25)"><use href="#coffee"/></g>
+ <path class="pencil draw" pathLength="1" d="M440 820H650l-45 -45m45 45l-45 45"/>
+ <path class="ink" d="M710 670h210v290q-105 95-210 0zM755 670v-80h120v80"/>
+ <text x="815" y="835" text-anchor="middle" class="txt small">YOUR</text><text x="815" y="890" text-anchor="middle" class="txt small">GOAL</text>
+ <text x="540" y="1260" text-anchor="middle" class="txt headline">SPEND WITH PURPOSE</text>
+ <text x="540" y="1350" text-anchor="middle" class="txt small">SAVE FOR WHAT MATTERS</text>
 </g>
-<g id="captions"><rect x="70" y="1580" width="940" height="190" rx="28" fill="#292722" opacity=".96"/><text id="cap1" x="540" y="1660" text-anchor="middle" fill="#fffdf7" font-family="Arial" font-size="48" font-weight="800"></text><text id="cap2" x="540" y="1720" text-anchor="middle" fill="#fffdf7" font-family="Arial" font-size="48" font-weight="800"></text></g>
+<g id="captions"><rect x="70" y="1550" width="940" height="210" rx="28"/><text id="cap1" x="540" y="1640" text-anchor="middle" font-size="48"></text><text id="cap2" x="540" y="1705" text-anchor="middle" font-size="48"></text></g>
 </svg>
 <script>
-(async()=>{const p=new URLSearchParams(location.search),u=p.get('timeline');let tl={segments:[]};if(u){try{tl=await(await fetch(u)).json()}catch(e){}}const ids=['s0','s1','s2','s3','s4','s5','s6'].map(id=>document.getElementById(id));const c1=document.getElementById('cap1'),c2=document.getElementById('cap2');
-function splitCaption(s,local){const words=s.replace(/[.,:;!?]/g,'').split(/\s+/);const chunks=[];for(let i=0;i<words.length;i+=5)chunks.push(words.slice(i,i+5).join(' '));const n=Math.min(chunks.length-1,Math.floor(local*chunks.length));return[chunks[n]||'',chunks[n+1]||''];}
-window.renderAt=t=>{if(!tl.segments.length)return;let i=tl.segments.findIndex(x=>t>=x.start&&t<x.end);if(i<0)i=tl.segments.length-1;const s=tl.segments[i],d=Math.max(.01,s.end-s.start),q=Math.max(0,Math.min(1,(t-s.start)/d));ids.forEach((el,j)=>{el.style.display=j===i?'inline':'none';if(j===i){const scale=1+.025*Math.sin(q*Math.PI);el.style.transformOrigin='540px 950px';el.style.transform='translate('+Math.sin(q*6.28)*12+'px,0) scale('+scale+')';}});
-if(i===0){document.getElementById('coffeeCup').setAttribute('transform','translate(520 '+(930-25*Math.sin(q*Math.PI*2)) +') scale(1.8)');document.getElementById('buyer').setAttribute('transform','translate(500 700) scale(.85) rotate('+(-8+16*q)+' 0 120)');}
-if(i===1){document.getElementById('cups5').setAttribute('transform','translate(0 '+(20*(1-q))+')');}
-if(i===3){const coin=document.getElementById('coin');coin.setAttribute('cy',770+170*q);coin.setAttribute('cx',520+180*q);}
-if(i===4){const graph=document.querySelector('#s4 path:nth-of-type(2)');if(graph)graph.style.strokeDasharray='900';if(graph)graph.style.strokeDashoffset=900*(1-q);}
-const pair=splitCaption(s.text,q);c1.textContent=pair[0];c2.textContent=pair[1];document.getElementById('captions').setAttribute('opacity',q<.015?0:1);};window.renderAt(0);})();
+(async()=>{
+ const params=new URLSearchParams(location.search);let tl={segments:[]};try{const u=params.get('timeline');if(u)tl=await(await fetch(u)).json()}catch(e){}
+ const sceneIds=['s0','s1','s2','s3','s4','s5','s6'],scenes=sceneIds.map(x=>document.getElementById(x)),cap1=document.getElementById('cap1'),cap2=document.getElementById('cap2');
+ function captionChunks(text){const w=(text||'').replace(/[^\w$%.,'-]+/g,' ').trim().split(/\s+/);const out=[];for(let i=0;i<w.length;i+=5)out.push(w.slice(i,i+5).join(' '));return out;}
+ function fit(el,max=840){let size=48;el.setAttribute('font-size',size);while(el.getComputedTextLength()>max&&size>32){size-=2;el.setAttribute('font-size',size)}}
+ function revealDraw(scene,q){scene.querySelectorAll('.draw').forEach((p)=>{p.style.strokeDasharray='1';p.style.strokeDashoffset=String(1-Math.min(1,Math.max(0,(q-.08)/.62)))});}
+ window.renderAt=(t)=>{
+  if(!tl.segments||!tl.segments.length)return;
+  let i=tl.segments.findIndex(x=>t>=x.start&&t<x.end);if(i<0)i=tl.segments.length-1;
+  const s=tl.segments[i],duration=Math.max(.01,s.end-s.start),q=Math.max(0,Math.min(1,(t-s.start)/duration)),scene=scenes[Math.min(i,6)];
+  scenes.forEach((el,j)=>{el.style.display=j===i?'inline':'none';});
+  revealDraw(scene,q);
+  if(i===0){const cup=document.getElementById('heroCup');cup.setAttribute('transform','translate(535 '+(850-18*Math.sin(q*Math.PI*4))+') scale(1.35)');}
+  if(i===1){const cards=document.getElementById('weekdayCards');cards.setAttribute('transform','translate(0 '+(12*Math.sin(q*Math.PI*4))+')');}
+  if(i===2){document.getElementById('calendar').setAttribute('transform','translate(540 700) scale('+(0.96+0.04*q)+')');}
+  if(i===3){const coin=document.getElementById('movingCoin');coin.setAttribute('transform','translate('+(430+300*q)+' '+(740-30*Math.sin(q*Math.PI))+')');}
+  const chunks=captionChunks(s.text),n=Math.min(Math.max(0,chunks.length-1),Math.floor(q*chunks.length));let a=chunks[n]||'',b='';
+  // One short caption phrase at a time; do not show future words early.
+  cap1.textContent=a;cap2.textContent=b;fit(cap1);fit(cap2);document.getElementById('captions').setAttribute('opacity',q<.025?0:1);
+ };
+ window.renderAt(0);
+})();
 </script></body></html>
