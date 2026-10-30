@@ -26,6 +26,10 @@ def main() -> int:
         raise SystemExit(f"FAIL: unexpected duration {duration:.2f}s")
     if v.get("codec_name") != "h264":
         raise SystemExit(f"FAIL: expected H.264, got {v.get('codec_name')}")
+    fps_parts = v.get("avg_frame_rate", "0/1").split("/")
+    actual_fps = float(fps_parts[0]) / float(fps_parts[1]) if float(fps_parts[1]) else 0
+    if abs(actual_fps - 30) > 0.01:
+        raise SystemExit(f"FAIL: expected 30 FPS, got {actual_fps:.3f}")
     print(f"PASS: {video} | {duration:.2f}s | 1080x1920 | H.264 + {a.get('codec_name')} | {video.stat().st_size:,} bytes")
     return 0
 
