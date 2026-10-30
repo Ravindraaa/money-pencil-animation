@@ -6,8 +6,5 @@
   "scripts": {
     "render:short": "python scripts/render_short.py",
     "qa": "python scripts/qa_video.py output/money-stickman-short-01.mp4"
-  },
-  "devDependencies": {
-    "playwright": "1.56.1"
   }
 }
