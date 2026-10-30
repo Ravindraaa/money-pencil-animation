@@ -24,7 +24,7 @@ ENTITY_RULES = [
     ("calendar", r"week|weekday|month|year|daily|every day|deadline"),
     ("warning", r"risk|not guaranteed|uncertain|tax|inflation|loss|penalty|downside"),
     ("wallet", r"budget|spend|save|saving|wallet|purchase|buy|cost"),
-    ("cash", r"\\$\\s?[\\d,]+|dollar|cash|money|balance"),
+    ("cash", r"\$\s?[\d,]+|dollar|cash|money|balance"),
     ("target", r"goal|target|future|plan|retirement|freedom"),
 ]
 HEADLINES = {
