@@ -128,10 +128,9 @@ def main() -> int:
     metadata = {
         "title": SPEC["title"],
         "description": (
-            "Could one small daily expense become a bigger opportunity? This video uses an "
-            "illustrative investing example, not a promise or a prediction. The 7% return is "
-            "hypothetical; actual returns vary, and fees, taxes, and inflation are not included. "
-            "This is educational content, not personal financial advice.\n\n"
+            "Educational content from The Money Stickman. Examples and projections are "
+            "illustrative only, not promises or personal financial advice. Verify figures, "
+            "assumptions, fees, taxes, and local rules before making financial decisions.\n\n"
             "Follow The Money Stickman for practical money lessons."
         ),
         "hashtags": ["#PersonalFinance", "#MoneyHabits", "#InvestingBasics", "#MoneyStickman"],
