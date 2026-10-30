@@ -16,6 +16,7 @@ on:
     paths:
       - 'src/**'
       - 'scripts/**'
+      - 'tests/**'
       - 'requirements.txt'
       - '.github/workflows/render-short.yml'
   push:
