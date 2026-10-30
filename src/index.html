@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Money Stickman — Pencil Short</title>
+<style>
+  html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f7f4ec}
+  body{font-family:Georgia,"Times New Roman",serif}
+  #stage{width:100vw;height:100vh;display:block}
+</style>
+</head>
+<body>
+<svg id="stage" viewBox="0 0 1080 1920" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Pencil sketch animation about small daily spending">
+<defs>
+  <filter id="pencil"><feTurbulence type="fractalNoise" baseFrequency=".7" numOctaves="2" seed="12" result="noise"/><feDisplacementMap in="SourceGraphic" in2="noise" scale="1.1"/></filter>
+  <pattern id="paper" width="22" height="22" patternUnits="userSpaceOnUse"><path d="M2 4l2 0M14 17l3 0M8 11l1 0" stroke="#b9b2a5" stroke-opacity=".15" stroke-width="1"/></pattern>
+</defs>
+<rect width="1080" height="1920" fill="#f7f4ec"/>
+<rect width="1080" height="1920" fill="url(#paper)"/>
+<g id="header" fill="#292722" text-anchor="middle">
+ <text x="540" y="150" font-size="30" letter-spacing="8" fill="#82796c">THE MONEY STICKMAN</text>
+ <path d="M220 184H860" stroke="#aaa194" stroke-width="2"/>
+</g>
+<g id="scene0" class="scene" stroke="#292722" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#pencil)">
+ <path class="draw" d="M310 800 Q320 670 470 650 Q630 620 730 730 L700 1050 Q550 1110 360 1030Z" stroke-width="9"/>
+ <path class="draw" d="M370 760 Q480 680 650 740M420 860Q540 810 650 850" stroke-width="5"/>
+ <path class="draw" d="M695 720 Q780 690 800 780 L770 850" stroke-width="8"/>
+ <path class="draw" d="M420 1060 L400 1190 M640 1060 L670 1190" stroke-width="8"/>
+ <path class="draw" d="M460 900 Q530 840 600 900" stroke-width="7"/>
+ <path class="draw" d="M455 950 Q540 1020 615 950" stroke-width="7"/>
+ <g transform="translate(810 560)"><path class="draw" d="M0 0L100 -60L170 30L70 90Z" stroke-width="7"/><text x="82" y="35" fill="#292722" stroke="none" font-size="54" text-anchor="middle">$7</text></g>
+</g>
+<g id="scene1" class="scene" stroke="#292722" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#pencil)">
+ <path class="draw" d="M140 670 Q170 590 250 600 L300 740 L190 790Z" stroke-width="8"/>
+ <path class="draw" d="M190 600 Q210 550 255 570" stroke-width="7"/>
+ <path class="draw" d="M340 630 Q410 600 470 640 L450 770 L350 770Z" stroke-width="8"/>
+ <path class="draw" d="M370 620 L390 550 L430 620" stroke-width="7"/>
+ <path class="draw" d="M550 650 Q620 580 690 650 L670 790 L560 790Z" stroke-width="8"/>
+ <path class="draw" d="M585 625L605 555L645 625" stroke-width="7"/>
+ <path class="draw" d="M760 680 Q850 610 925 680 L900 810 L775 810Z" stroke-width="8"/>
+ <path class="draw" d="M800 650L820 585L860 650" stroke-width="7"/>
+ <path class="draw" d="M140 950H930 M180 920V990 M290 920V990 M400 920V990 M510 920V990 M620 920V990 M730 920V990 M840 920V990" stroke-width="5"/>
+ <path class="draw" d="M230 1160 Q520 1030 850 1160" stroke-width="8"/>
+ <text x="540" y="1290" font-size="100" fill="#292722" stroke="none" text-anchor="middle">$1,750 / YEAR</text>
+</g>
+<g id="scene2" class="scene" stroke="#292722" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#pencil)">
+ <path class="draw" d="M180 800H900 M220 800V1140 M860 800V1140 M180 1140H900" stroke-width="9"/>
+ <path class="draw" d="M300 1080V990H400V1080 M470 1080V920H570V1080 M640 1080V850H740V1080" stroke-width="9"/>
+ <path class="draw" d="M270 760L500 580L730 760" stroke-width="9"/>
+ <path class="draw" d="M500 580L470 620 M500 580L540 605" stroke-width="8"/>
+ <text x="540" y="1280" font-size="110" fill="#292722" stroke="none" text-anchor="middle">15 YEARS</text>
+</g>
+<g id="scene3" class="scene" stroke="#292722" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#pencil)">
+ <path class="draw" d="M190 1120V760H900" stroke-width="10"/>
+ <path class="draw" d="M230 1060L380 980L520 900L670 770L850 660" stroke-width="14"/>
+ <path class="draw" d="M810 650L855 655L845 700" stroke-width="10"/>
+ <path class="draw" d="M250 1170H850" stroke-width="5"/>
+ <circle class="draw" cx="380" cy="980" r="20" stroke-width="7"/><circle class="draw" cx="520" cy="900" r="20" stroke-width="7"/><circle class="draw" cx="670" cy="770" r="20" stroke-width="7"/>
+ <text x="540" y="1350" font-size="124" text-anchor="middle" stroke="none" fill="#292722">$44,000</text>
+ <text x="540" y="1420" font-size="34" text-anchor="middle" stroke="none" fill="#6d655b">HYPOTHETICAL EXAMPLE</text>
+</g>
+<g id="scene4" class="scene" stroke="#292722" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#pencil)">
+ <path class="draw" d="M400 620L680 900M680 620L400 900" stroke-width="20"/>
+ <path class="draw" d="M310 1040Q540 920 770 1040" stroke-width="10"/>
+ <path class="draw" d="M400 1100L680 1100" stroke-width="7"/>
+ <text x="540" y="1280" font-size="58" text-anchor="middle" stroke="none" fill="#292722">7% IS AN ASSUMPTION</text>
+</g>
+<g id="scene5" class="scene" stroke="#292722" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#pencil)">
+ <path class="draw" d="M300 780Q350 670 470 690Q600 650 700 760L660 1040Q510 1090 340 1030Z" stroke-width="9"/>
+ <path class="draw" d="M380 850Q430 800 480 850M540 850Q600 800 650 850" stroke-width="8"/>
+ <path class="draw" d="M440 940Q520 1000 590 940" stroke-width="8"/>
+ <path class="draw" d="M230 1190L850 1190" stroke-width="6"/>
+ <path class="draw" d="M350 1130L350 1250M730 1130L730 1250" stroke-width="6"/>
+ <text x="540" y="1390" font-size="66" text-anchor="middle" stroke="none" fill="#292722">CHOOSE WHAT MATTERS.</text>
+</g>
+<g id="scene6" class="scene" stroke="#292722" fill="none" stroke-linecap="round" stroke-linejoin="round" filter="url(#pencil)">
+ <path class="draw" d="M390 700Q540 540 690 700Q760 820 680 970Q540 1090 400 970Q320 820 390 700Z" stroke-width="10"/>
+ <path class="draw" d="M460 800Q500 750 540 800Q580 750 620 800Q650 850 540 930Q430 850 460 800Z" stroke-width="8"/>
+ <path class="draw" d="M260 1150H820" stroke-width="7"/>
+ <path class="draw" d="M330 1200L540 1320L750 1200" stroke-width="7"/>
+ <text x="540" y="1460" font-size="58" text-anchor="middle" stroke="none" fill="#292722">FOLLOW FOR MONEY LESSONS</text>
+</g>
+<g id="caption" text-anchor="middle">
+ <rect id="captionBg" x="90" y="1570" width="900" height="180" rx="24" fill="#292722" opacity=".94"/>
+ <text id="captionText" x="540" y="1645" fill="#fffdf7" font-size="48" font-family="Arial,sans-serif" font-weight="700"></text>
+ <text id="captionText2" x="540" y="1705" fill="#fffdf7" font-size="48" font-family="Arial,sans-serif" font-weight="700"></text>
+</g>
+</svg>
+<script>
+(async()=>{
+ const params=new URLSearchParams(location.search);
+ const timelineUrl=params.get('timeline');
+ let timeline={segments:[]};
+ if(timelineUrl){try{timeline=await (await fetch(timelineUrl)).json()}catch(e){console.warn('Timeline fallback',e)}}
+ const scenes=[...document.querySelectorAll('.scene')];
+ const caption=document.getElementById('captionText');
+ const caption2=document.getElementById('captionText2');
+ const captionBg=document.getElementById('captionBg');
+ function wrap(text){const words=text.split(/\s+/);let a='',b='';for(const word of words){if((a+' '+word).trim().length<29)a=(a+' '+word).trim();else b=(b+' '+word).trim()}return [a,b]}
+ window.renderAt=(time)=>{
+  if(!timeline.segments.length)return;
+  let index=timeline.segments.findIndex(s=>time>=s.start&&time<s.end);
+  if(index<0)index=time>=timeline.duration?timeline.segments.length-1:0;
+  const seg=timeline.segments[index], duration=Math.max(.01,seg.end-seg.start);
+  const local=Math.max(0,Math.min(1,(time-seg.start)/duration));
+  const sceneIndex=Math.min(6,Math.floor(index*7/timeline.segments.length));
+  scenes.forEach((el,i)=>{
+    el.style.display=i===sceneIndex?'inline':'none';
+    el.querySelectorAll('.draw').forEach((path)=>{
+      if(!path.dataset.length){try{path.dataset.length=path.getTotalLength()}catch(e){path.dataset.length=1000}}
+      const length=Number(path.dataset.length);
+      path.style.strokeDasharray=length;
+      path.style.strokeDashoffset=length*(1-Math.min(1,Math.max(0,(local*1.9-.05))));
+      path.style.opacity=local<.04?0:1;
+    });
+  });
+  const [line1,line2]=wrap(seg.text);
+  caption.textContent=line1; caption2.textContent=line2;
+  captionBg.setAttribute('opacity',local<.02?'0':'0.94');
+ };
+ window.renderAt(0);
+})();
+</script>
+</body>
+</html>
