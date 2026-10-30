@@ -38,7 +38,7 @@ def probe_duration(path: Path) -> float:
 
 
 async def synthesize(segment: str, destination: Path) -> None:
-    communicate = edge_tts.Communicate(segment, VOICE, rate="+2%", volume="+0%")
+    communicate = edge_tts.Communicate(segment, VOICE, rate="-8%", volume="+0%")
     await communicate.save(str(destination))
 
 
@@ -64,17 +64,27 @@ def main() -> int:
         audio_paths.append(destination)
 
     durations = [probe_duration(path) for path in audio_paths]
+    # Short pauses between sentences let the viewer process each visual beat.
+    pause_seconds = 0.22
+    silence = WORK / "pause.mp3"
+    run(["ffmpeg", "-y", "-f", "lavfi", "-i", "anullsrc=r=24000:cl=mono",
+         "-t", str(pause_seconds), "-c:a", "libmp3lame", "-q:a", "9", str(silence)])
     timeline = []
     cursor = 0.0
     for index, duration in enumerate(durations):
         timeline.append({"start": cursor, "end": cursor + duration, "text": segments[index]})
-        cursor += duration
+        cursor += duration + (pause_seconds if index < len(durations) - 1 else 0.0)
     total_duration = cursor
 
     timeline_path = WORK / "timeline.json"
     timeline_path.write_text(json.dumps({"duration": total_duration, "segments": timeline}), encoding="utf-8")
     concat_file = WORK / "audio_concat.txt"
-    concat_file.write_text("".join(f"file '{p.resolve().as_posix()}'\n" for p in audio_paths), encoding="utf-8")
+    concat_entries = []
+    for index, path in enumerate(audio_paths):
+        concat_entries.append(f"file '{path.resolve().as_posix()}'\n")
+        if index < len(audio_paths) - 1:
+            concat_entries.append(f"file '{silence.resolve().as_posix()}'\n")
+    concat_file.write_text("".join(concat_entries), encoding="utf-8")
     narration = WORK / "narration.mp3"
     run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat_file),
          "-c:a", "libmp3lame", "-q:a", "3", str(narration)])
