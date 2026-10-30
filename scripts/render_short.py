@@ -1,0 +1,124 @@
+from __future__ import annotations
+
+import asyncio
+import json
+import math
+import shutil
+import subprocess
+import sys
+from pathlib import Path
+
+import edge_tts
+from playwright.sync_api import sync_playwright
+
+ROOT = Path(__file__).resolve().parents[1]
+OUT = ROOT / "output"
+WORK = ROOT / "work"
+SPEC = json.loads((ROOT / "scripts/short_01.json").read_text(encoding="utf-8"))
+VOICE = SPEC.get("voice", "en-US-GuyNeural")
+FPS = int(SPEC.get("fps", 30))
+WIDTH = int(SPEC.get("width", 1080))
+HEIGHT = int(SPEC.get("height", 1920))
+
+
+def run(command: list[str]) -> None:
+    subprocess.run(command, check=True)
+
+
+def probe_duration(path: Path) -> float:
+    result = subprocess.run(
+        ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+         "-of", "default=noprint_wrappers=1:nokey=1", str(path)],
+        check=True, capture_output=True, text=True
+    )
+    return float(result.stdout.strip())
+
+
+async def synthesize(segment: str, destination: Path) -> None:
+    communicate = edge_tts.Communicate(segment, VOICE, rate="+2%", volume="+0%")
+    await communicate.save(str(destination))
+
+
+def main() -> int:
+    for binary in ("ffmpeg", "ffprobe"):
+        if shutil.which(binary) is None:
+            raise SystemExit(f"Required executable not found: {binary}")
+
+    OUT.mkdir(parents=True, exist_ok=True)
+    WORK.mkdir(parents=True, exist_ok=True)
+    audio_dir = WORK / "audio"
+    frames_dir = WORK / "frames"
+    audio_dir.mkdir(exist_ok=True)
+    if frames_dir.exists():
+        shutil.rmtree(frames_dir)
+    frames_dir.mkdir()
+
+    segments = SPEC["segments"]
+    audio_paths: list[Path] = []
+    for index, text in enumerate(segments):
+        destination = audio_dir / f"segment_{index:02d}.mp3"
+        asyncio.run(synthesize(text, destination))
+        audio_paths.append(destination)
+
+    durations = [probe_duration(path) for path in audio_paths]
+    timeline = []
+    cursor = 0.0
+    for index, duration in enumerate(durations):
+        timeline.append({"start": cursor, "end": cursor + duration, "text": segments[index]})
+        cursor += duration
+    total_duration = cursor
+
+    timeline_path = WORK / "timeline.json"
+    timeline_path.write_text(json.dumps({"duration": total_duration, "segments": timeline}), encoding="utf-8")
+    concat_file = WORK / "audio_concat.txt"
+    concat_file.write_text("".join(f"file '{p.resolve().as_posix()}'\n" for p in audio_paths), encoding="utf-8")
+    narration = WORK / "narration.mp3"
+    run(["ffmpeg", "-y", "-f", "concat", "-safe", "0", "-i", str(concat_file),
+         "-c:a", "libmp3lame", "-q:a", "3", str(narration)])
+
+    html = (ROOT / "src/index.html").resolve().as_uri() + "?timeline=" + timeline_path.as_uri()
+    frame_count = math.ceil(total_duration * FPS)
+
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(headless=True)
+        page = browser.new_page(viewport={"width": WIDTH, "height": HEIGHT}, device_scale_factor=1)
+        page.goto(html, wait_until="load")
+        page.wait_for_function("window.renderAt !== undefined")
+        for frame in range(frame_count):
+            timestamp = frame / FPS
+            page.evaluate("(t) => window.renderAt(t)", timestamp)
+            page.screenshot(path=str(frames_dir / f"frame_{frame:06d}.png"))
+        browser.close()
+
+    silent_video = WORK / "silent.mp4"
+    final_video = OUT / "money-stickman-short-01.mp4"
+    run(["ffmpeg", "-y", "-framerate", str(FPS), "-i", str(frames_dir / "frame_%06d.png"),
+         "-c:v", "libx264", "-preset", "medium", "-crf", "18", "-pix_fmt", "yuv420p",
+         "-an", str(silent_video)])
+    run(["ffmpeg", "-y", "-i", str(silent_video), "-i", str(narration),
+         "-map", "0:v:0", "-map", "1:a:0", "-c:v", "copy", "-c:a", "aac",
+         "-b:a", "192k", "-shortest", "-movflags", "+faststart", str(final_video)])
+
+    metadata = {
+        "title": SPEC["title"],
+        "description": (
+            "Could one small daily expense become a bigger opportunity? This video uses an "
+            "illustrative investing example, not a promise or a prediction. The 7% return is "
+            "hypothetical; actual returns vary, and fees, taxes, and inflation are not included. "
+            "This is educational content, not personal financial advice.\n\n"
+            "Follow The Money Stickman for practical money lessons."
+        ),
+        "hashtags": ["#PersonalFinance", "#MoneyHabits", "#InvestingBasics", "#MoneyStickman"],
+        "voice": VOICE,
+        "duration_seconds": round(total_duration, 2),
+        "fps": FPS,
+        "resolution": f"{WIDTH}x{HEIGHT}"
+    }
+    (OUT / "short-01-metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
+    print(f"Rendered: {final_video}")
+    print(f"Duration: {total_duration:.2f}s")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
