@@ -78,6 +78,11 @@ def main() -> int:
         cursor += duration + (pause_seconds if index < len(durations) - 1 else 0.0)
     total_duration = cursor
 
+    storyboard = build_storyboard(segments)
+    for item, scene in zip(timeline, storyboard["scenes"]):
+        item["scene"] = scene
+    storyboard_path = OUT / f"{OUTPUT_NAME}-storyboard.json"
+    storyboard_path.write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
     timeline_path = WORK / "timeline.json"
     timeline_path.write_text(json.dumps({"duration": total_duration, "segments": timeline}), encoding="utf-8")
     concat_file = WORK / "audio_concat.txt"
