@@ -55,3 +55,16 @@ python scripts/qa_video.py output/money-stickman-your-topic.mp4
 ```
 
 This is a reusable script-driven pipeline, not yet an AI storyboard generator: the seven scene illustrations are a reusable template. A later scene-library upgrade can add more visual types without changing the TTS/timeline/render core.
+
+
+## Semantic storyboard planner (new)
+
+Before rendering, the pipeline now runs a local, rule-based planner over every narration beat. It classifies beats into finance scene types (budget/spending, investing, growth, debt, housing, risk, goals, or general explainer), extracts drawable entity tags and numeric emphasis labels, and writes a storyboard JSON beside the MP4. It uses no external API key or paid model.
+
+Run its tests with:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+The planner is the first semantic layer, not a claim of fully generated artwork yet. The existing SVG renderer still draws its current scene library; the next increment will connect these scene plans to a broader reusable SVG asset library and per-word caption timing.
