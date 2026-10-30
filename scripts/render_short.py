@@ -13,7 +13,7 @@ from pathlib import Path
 
 import edge_tts
 from playwright.sync_api import sync_playwright
-from scripts.scene_planner import build_storyboard
+from scene_planner import build_storyboard
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
