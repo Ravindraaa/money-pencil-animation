@@ -30,7 +30,17 @@ def main() -> int:
     actual_fps = float(fps_parts[0]) / float(fps_parts[1]) if float(fps_parts[1]) else 0
     if abs(actual_fps - 30) > 0.01:
         raise SystemExit(f"FAIL: expected 30 FPS, got {actual_fps:.3f}")
-    print(f"PASS: {video} | {duration:.2f}s | 1080x1920 | H.264 + {a.get('codec_name')} | {video.stat().st_size:,} bytes")
+    storyboard = video.with_name(video.stem + "-storyboard.json")
+    metadata = video.with_name(video.stem + "-metadata.json")
+    if not storyboard.is_file() or not metadata.is_file():
+        raise SystemExit("FAIL: storyboard and metadata JSON must accompany the MP4")
+    board = json.loads(storyboard.read_text(encoding="utf-8"))
+    meta = json.loads(metadata.read_text(encoding="utf-8"))
+    if not board.get("scenes") or len(board["scenes"]) != board.get("scene_count"):
+        raise SystemExit("FAIL: storyboard is empty or scene count is inconsistent")
+    if meta.get("scene_count") != board["scene_count"]:
+        raise SystemExit("FAIL: metadata and storyboard scene counts differ")
+    print("PASS: " + str(video) + " | " + str(round(duration,2)) + "s | 1080x1920 | H.264 + " + str(a.get("codec_name")) + " | " + str(len(board["scenes"])) + " scenes | " + format(video.stat().st_size,",") + " bytes")
     return 0
 
 if __name__ == "__main__":
