@@ -81,10 +81,19 @@ const amount=(s.emphasis||[])[0];if(amount)out+='<g data-motion="pop" transform=
 return out;
 }
 function build(s){if(s.visual_engine==='motion_comic')return heading(s)+semanticScene(s);let art=s.shot_type==='credit_card_hook'?cardTrap():s.shot_type==='credit_balance'?balanceTrap():s.shot_type==='debt_methods'?ladders():s.shot_type==='rate_call_cushion'?callCushion():s.shot_type==='debt_cta'?sendCta():s.shot_type==='bank_balance'?phone():s.shot_type==='paycheck'?paycheck():s.shot_type==='lifestyle_stairs'?stairs():s.shot_type==='subscriptions'?subscriptions():s.shot_type==='inflation_cash'?inflation():s.shot_type==='fifty_fifty'?split():semanticScene(s);return heading(s)+art}
-let motionNodes=[];
-function prepareMotion(){motionNodes=[...scene.querySelectorAll(':scope > g')].map((el,i)=>({el,base:el.getAttribute('transform')||'',kind:el.dataset.motion||'float',delay:Number(el.dataset.delay||i*.08),index:i}));}
+let motionNodes=[],drawPaths=[],pencilHand=null;
+function prepareMotion(){
+ motionNodes=[...scene.querySelectorAll(':scope > g')].map((el,i)=>({el,base:el.getAttribute('transform')||'',kind:el.dataset.motion||'float',delay:Number(el.dataset.delay||i*.08),index:i}));
+ drawPaths=[...scene.querySelectorAll('path, line, polyline, polygon')].filter(el=>{try{return el.getTotalLength()>8}catch(e){return false}});
+ drawPaths.forEach(el=>{const len=el.getTotalLength();el.dataset.drawLength=len;el.style.strokeDasharray=len;el.style.strokeDashoffset=len;});
+ if(!pencilHand){pencilHand=document.createElementNS('http://www.w3.org/2000/svg','g');pencilHand.setAttribute('id','pencilHand');pencilHand.setAttribute('opacity','0');pencilHand.innerHTML='<path d="M0 0L-25 52L12 36Z" fill="#e8b653" stroke="#25231f" stroke-width="5" stroke-linejoin="round"/><path d="M-25 52L-32 65L-13 58Z" fill="#25231f"/><circle cx="5" cy="8" r="17" fill="#f0c6a4" stroke="#25231f" stroke-width="5"/>';document.getElementById('stage').appendChild(pencilHand);}
+}
 function animateScene(t,q){
-motionNodes.forEach(({el,base,kind,delay,index})=>{
+ if(drawPaths.length){const total=drawPaths.length,progress=Math.max(0,Math.min(1,(q-.04)/.78))*total;let active=null,activePoint=null;
+ drawPaths.forEach((el,i)=>{const len=Number(el.dataset.drawLength||0),local=Math.max(0,Math.min(1,progress-i));el.style.strokeDashoffset=String(len*(1-local));if(local>0&&local<1){active=el;try{activePoint=el.getPointAtLength(len*local)}catch(e){}}});
+ if(pencilHand){if(active&&activePoint){const m=active.getScreenCTM();if(m){const p=new DOMPoint(activePoint.x,activePoint.y).matrixTransform(m);pencilHand.setAttribute('transform','translate('+p.x+' '+p.y+') rotate(-28)');pencilHand.setAttribute('opacity','1');}}else pencilHand.setAttribute('opacity','0');}
+ }
+ motionNodes.forEach(({el,base,kind,delay,index})=>{
 const p=Math.max(0,t-delay)*2.15,enter=Math.min(1,Math.max(0,q*7-delay));
 let x=0,y=0,r=0,z=1;
 if(kind==='float'||kind==='sway'){y=Math.sin(p+index*.6)*(kind==='sway'?7:13);r=Math.sin(p*.65+index)*(kind==='sway'?3:1.4);}
