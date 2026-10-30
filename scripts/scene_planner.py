@@ -12,7 +12,6 @@ RULES = [
     ("risk", r"risk|guarantee|uncertain|market|volatil|fee|tax|inflation|loss|downside", ["warning", "chart", "shield"]),
     ("growth", r"compound|growth|return|interest|million|future value|\$[\d,]+", ["chart", "coins", "calendar"]),
     ("investing", r"invest|stock|share|portfolio|fund|retirement|broker", ["person", "coins", "portfolio"]),
-    ("debt", r"debt|loan|credit card|interest rate|borrow|repay|emi", ["bill", "card", "wallet"]),
     ("housing", r"house|home|rent|mortgage|property|down payment", ["house", "wallet", "calendar"]),
     ("budget", r"budget|spend|expense|save|saving|cut back|habit|coffee|purchase|buy", ["wallet", "coins", "calendar"]),
     ("goal", r"goal|future|plan|afford|freedom|target|dream", ["target", "person", "coins"]),
