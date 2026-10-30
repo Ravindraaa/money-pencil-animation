@@ -43,7 +43,7 @@
   <g transform="translate(910 440)"><rect x="-75" y="0" width="150" height="420" rx="22" class="card"/><text y="65" text-anchor="middle" class="txt small">FRI</text><g transform="translate(0 230) scale(.95)"><use href="#coffee"/></g></g>
  </g>
  <text x="540" y="1060" text-anchor="middle" class="txt headline">$7 × 5 = $35</text>
- <text x="540" y="1150" text-anchor="middle" class="txt small">SPENT EVERY WEEK</text>
+ <text x="540" y="1150" text-anchor="middle" class="txt small">SPENT EVERY WEEK</text><text x="540" y="1290" text-anchor="middle" class="txt headline">$1,750 / YEAR</text>
  <g transform="translate(540 1390) scale(.5)"><use href="#person"/></g>
 </g>
 <!-- Scene 2: 50 weeks and annual spend -->
@@ -100,12 +100,23 @@
  <text x="540" y="1260" text-anchor="middle" class="txt headline">SPEND WITH PURPOSE</text>
  <text x="540" y="1350" text-anchor="middle" class="txt small">SAVE FOR WHAT MATTERS</text>
 </g>
+<!-- Scene 7: clear follow / action ending -->
+<g id="s7" class="scene">
+ <text x="540" y="280" text-anchor="middle" class="txt headline">ONE SMALL CHANGE.</text>
+ <g transform="translate(300 690) scale(.78)"><use href="#person"/></g>
+ <path class="pencil draw" pathLength="1" d="M430 850H620l-42 -42m42 42l-42 42"/>
+ <path class="ink" d="M690 680h220v300q-110 100-220 0zM745 680v-80h110v80"/>
+ <text x="800" y="830" text-anchor="middle" class="txt small">YOUR</text><text x="800" y="890" text-anchor="middle" class="txt small">FUTURE</text>
+ <text x="540" y="1210" text-anchor="middle" class="txt headline">MAKE IT COUNT.</text>
+ <text x="540" y="1310" text-anchor="middle" class="txt small">FOLLOW THE MONEY STICKMAN</text>
+ <text x="540" y="1390" text-anchor="middle" class="txt small">FOR SIMPLE MONEY LESSONS</text>
+</g>
 <g id="captions"><rect x="70" y="1550" width="940" height="210" rx="28"/><text id="cap1" x="540" y="1640" text-anchor="middle" font-size="48"></text><text id="cap2" x="540" y="1705" text-anchor="middle" font-size="48"></text></g>
 </svg>
 <script>
 (async()=>{
  const params=new URLSearchParams(location.search);let tl={segments:[]};try{const u=params.get('timeline');if(u)tl=await(await fetch(u)).json()}catch(e){}
- const sceneIds=['s0','s1','s2','s3','s4','s5','s6'],scenes=sceneIds.map(x=>document.getElementById(x)),cap1=document.getElementById('cap1'),cap2=document.getElementById('cap2');
+ const sceneIds=['s0','s1','s2','s3','s4','s5','s6','s7'],scenes=sceneIds.map(x=>document.getElementById(x)),cap1=document.getElementById('cap1'),cap2=document.getElementById('cap2');
  function captionChunks(text){const w=(text||'').replace(/[^\w$%.,'-]+/g,' ').trim().split(/\s+/);const out=[];for(let i=0;i<w.length;i+=5)out.push(w.slice(i,i+5).join(' '));return out;}
  function fit(el,max=840){let size=48;el.setAttribute('font-size',size);while(el.getComputedTextLength()>max&&size>32){size-=2;el.setAttribute('font-size',size)}}
  function revealDraw(scene,q){scene.querySelectorAll('.draw').forEach((p)=>{p.style.strokeDasharray='1';p.style.strokeDashoffset=String(1-Math.min(1,Math.max(0,(q-.08)/.62)))});}
