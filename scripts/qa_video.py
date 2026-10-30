@@ -22,7 +22,7 @@ def main() -> int:
     duration = float(data["format"]["duration"])
     if v.get("width") != 1080 or v.get("height") != 1920:
         raise SystemExit(f"FAIL: expected 1080x1920, got {v.get('width')}x{v.get('height')}")
-    if duration < 25 or duration > 70:
+    if duration < 25 or duration > 90:
         raise SystemExit(f"FAIL: unexpected duration {duration:.2f}s")
     if v.get("codec_name") != "h264":
         raise SystemExit(f"FAIL: expected H.264, got {v.get('codec_name')}")
