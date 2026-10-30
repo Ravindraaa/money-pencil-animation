@@ -41,6 +41,18 @@ function balanceTrap(){return '<g transform="translate(540 760)"><text x="0" y="
 function ladders(){return '<g transform="translate(270 820)"><text x="0" y="-320" text-anchor="middle" class="txt head">AVALANCHE</text><path d="M-130 250L-130 -180M130 250L130 -180" class="ink"/>'+[0,1,2,3].map(i=>'<path d="M-130 '+(170-i*100)+'H130" class="ink thin"/>').join('')+'<text x="0" y="315" text-anchor="middle" class="txt label">HIGHEST RATE FIRST</text><circle cx="0" cy="-40" r="48" fill="#4e9a68"/><path d="M-25 -40l18 20 40 -48" stroke="white" stroke-width="12" fill="none"/></g><g transform="translate(810 820)"><text x="0" y="-320" text-anchor="middle" class="txt head">SNOWBALL</text><path d="M-130 250L-130 -180M130 250L130 -180" class="ink"/>'+[0,1,2,3].map(i=>'<path d="M-130 '+(170-i*100)+'H130" class="ink thin"/>').join('')+'<text x="0" y="315" text-anchor="middle" class="txt label">SMALLEST BALANCE</text><circle cx="0" cy="-40" r="48" fill="#4e9a68"/><path d="M-25 -40l18 20 40 -48" stroke="white" stroke-width="12" fill="none"/></g>'}
 function callCushion(){return '<g transform="translate(540 780)"><rect x="-300" y="-330" width="600" height="510" rx="35" fill="#fffdf7" stroke="#25231f" stroke-width="10"/><text x="0" y="-240" text-anchor="middle" class="txt head">CALL YOUR BANK</text><circle cx="0" cy="-80" r="105" fill="#e8b653" stroke="#25231f" stroke-width="9"/><path d="M-55 -120q-35 55 45 120q55 40 90 -5l-45 -55 -35 25q-30 -15 -35 -45l25 -35z" fill="#25231f"/><rect x="-245" y="55" width="490" height="95" rx="16" fill="#dcebdc"/><text x="0" y="118" text-anchor="middle" class="txt label">LOWER MY RATE?</text><g transform="translate(0 420)"><rect x="-260" y="-75" width="520" height="155" rx="22" fill="#4e9a68" stroke="#25231f" stroke-width="9"/><text x="0" y="20" text-anchor="middle" class="txt head" style="fill:white">$1,000 CUSHION</text><path d="M-420 -230L-275 -95" stroke="#d84b3e" stroke-width="15"/><path d="M-340 -100l65 5 -5 -65" stroke="#d84b3e" stroke-width="12" fill="none"/><text x="-360" y="-270" class="txt label red">CAR REPAIR</text></g></g>'}
 function sendCta(){return '<g transform="translate(540 850)"><rect x="-440" y="-230" width="880" height="430" rx="28" fill="#fffdf7" stroke="#25231f" stroke-width="12"/><text x="0" y="-80" text-anchor="middle" class="txt head">SEND TO SOMEONE</text><text x="0" y="15" text-anchor="middle" class="txt head">WITH A CARD BALANCE</text><path d="M-360 90Q0 180 360 90" stroke="#d84b3e" stroke-width="18" fill="none" stroke-linecap="round"/><text x="0" y="320" text-anchor="middle" class="txt label">FOLLOW FOR MORE</text></g>'}
+function characterAction(text){
+const v=String(text||'').toLowerCase();
+if(/win|success|achiev|profit|grow|increase|raise|invest/.test(v))return {arms:'M0 100L-95 -10M0 100L95 -10',legs:'M0 238L-85 345M0 238L85 345',face:'M-18 18Q0 40 18 18'};
+if(/debt|loss|risk|fear|worr|stress|bill|expensive|inflation/.test(v))return {arms:'M0 105L-95 155M0 105L95 155',legs:'M0 238L-70 370M0 238L70 370',face:'M-18 28Q0 10 18 28'};
+if(/pay|hold|carry|save|keep|cash|money/.test(v))return {arms:'M0 105L-90 45M0 105L90 45',legs:'M0 238L-65 365M0 238L65 365',face:'M-18 20Q0 34 18 20'};
+if(/choose|pick|option|compare|first|second|decide/.test(v))return {arms:'M0 105L-90 170M0 105L105 5',legs:'M0 238L-65 365M0 238L65 365',face:'M-18 20Q0 32 18 20'};
+return {arms:'M0 105L-88 155M0 105L88 155',legs:'M0 238L-65 365M0 238L65 365',face:'M-18 18Q0 34 18 18'};
+}
+function drawCharacter(text){
+const p=characterAction(text);
+return '<g class="character" data-motion="sway"><circle cx="0" cy="0" r="48" fill="#f7f4ec" stroke="#25231f" stroke-width="10"/><path d="M-20 -7q10 -12 20 0M8 -7q10 -12 20 0'+p.face+'" fill="none" stroke="#25231f" stroke-width="8" stroke-linecap="round"/><path d="M0 48V238'+p.arms+p.legs+'" fill="none" stroke="#25231f" stroke-width="12" stroke-linecap="round" stroke-linejoin="round"/></g>';
+}
 function semanticScene(s){
 const ink='stroke="#25231f" stroke-width="11" stroke-linecap="round" stroke-linejoin="round"';
 const art={
@@ -63,7 +75,7 @@ const types=names.length?names:['target','cash'];
 const pos=types.length===1?[[540,850]]:types.length===2?[[300,850],[780,850]]:[[190,850],[540,850],[890,850]];
 let out='<ellipse cx="540" cy="1390" rx="430" ry="45" fill="#e5dfd2"/><path d="M90 1420H990" stroke="#25231f" stroke-width="8"/>';
 types.forEach((v,i)=>{const x=pos[i][0],y=pos[i][1],sc=types.length===3?.78:1;out+='<g data-motion="float" data-delay="'+(i*.18)+'" transform="translate('+x+' '+y+') scale('+sc+')">'+art[v]+'</g>';});
-out+='<g data-motion="sway" transform="translate(540 1190)"><use href="#person"/></g>';
+out+='<g transform="translate(540 1190)">'+drawCharacter(s.source_text||s.subhead||s.headline)+'</g>';
 out+='<g data-motion="pop" transform="translate(540 470)"><rect x="-410" y="-72" width="820" height="144" rx="26" fill="#25231f"/><text x="0" y="20" text-anchor="middle" class="txt head" style="fill:#fffdf7">'+esc((s.headline||'THE MONEY IDEA').toUpperCase())+'</text></g>';
 const amount=(s.emphasis||[])[0];if(amount)out+='<g data-motion="pop" transform="translate(540 1530)"><rect x="-230" y="-62" width="460" height="124" rx="22" fill="#e8b653" stroke="#25231f" stroke-width="8"/><text x="0" y="23" text-anchor="middle" class="txt head">'+esc(amount)+'</text></g>';
 return out;
