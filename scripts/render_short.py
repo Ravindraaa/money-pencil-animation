@@ -13,6 +13,7 @@ from pathlib import Path
 
 import edge_tts
 from playwright.sync_api import sync_playwright
+from scene_planner import build_storyboard
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output"
@@ -79,6 +80,10 @@ def main() -> int:
     total_duration = cursor
 
     timeline_path = WORK / "timeline.json"
+    storyboard = build_storyboard(segments)
+    storyboard_path = WORK / "scene_plan.json"
+    storyboard_path.write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
+    (OUT / f"{OUTPUT_NAME}-storyboard.json").write_text(json.dumps(storyboard, indent=2), encoding="utf-8")
     timeline_path.write_text(json.dumps({"duration": total_duration, "segments": timeline}), encoding="utf-8")
     concat_file = WORK / "audio_concat.txt"
     concat_entries = []
@@ -132,7 +137,9 @@ def main() -> int:
         "voice": VOICE,
         "duration_seconds": round(total_duration, 2),
         "fps": FPS,
-        "resolution": f"{WIDTH}x{HEIGHT}"
+        "resolution": f"{WIDTH}x{HEIGHT}",
+        "storyboard_file": f"{OUTPUT_NAME}-storyboard.json",
+        "scene_planner": storyboard["planner"]
     }
     (OUT / f"{OUTPUT_NAME}-metadata.json").write_text(json.dumps(metadata, indent=2), encoding="utf-8")
     print(f"Rendered: {final_video}")
